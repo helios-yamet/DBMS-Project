@@ -43,6 +43,9 @@ const admin_teachers=require('./utils/Admin/teachers')
 const admin_delete =require('./utils/Admin/deleteUser')
 
 const app= express();
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin": "*")
+  })
 const { Http2ServerRequest } = require("http2");
 app.use(express.json())
 app.use(cors())
