@@ -40,9 +40,6 @@ const { Http2ServerRequest } = require("http2");
 app.use(express.json())
 
 
-    
-})
-
 
 const server = http.createServer(app)
 server.listen(3000)
