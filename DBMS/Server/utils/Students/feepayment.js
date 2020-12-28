@@ -1,4 +1,4 @@
-const handleProfile = (knex) => (req, res) => {
+const getFees = (knex) => (req, res) => {
     const { id,grade,section } = req.body;
 
     knex('Students')
@@ -16,5 +16,5 @@ const handleProfile = (knex) => (req, res) => {
 }
 
 module.exports = {
-    handleProfile: handleProfile
+    getFees: getFees
 };

@@ -1,8 +1,8 @@
-const librarydues = (knex) => (req, res) => {
+const getLibrarydues = (knex) => (req, res) => {
     const { id } = req.body;
 
     knex('Library')
-        .returning('Dues')
+        .select('Dues')
         .where('Library card Number', '=', id)
         .orWhere('Student ID','=',id)
         .orWhere("Employee ID",'=',id)
@@ -11,5 +11,5 @@ const librarydues = (knex) => (req, res) => {
 }
 
 module.exports = {
-    librarydues: librarydues
+    getLibrarydues: getLibrarydues
 };

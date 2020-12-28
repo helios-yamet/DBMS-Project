@@ -22,7 +22,7 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
     .where('id', '=', id)
     .then(data => {
         console.log(data[0]);
-        if(bcrypt.compareSync(password, data[0].hash)) {
+        if(password==data[0].hash)) {
             console.log('logged in');
             return knex.select('*'). from(table)
                 .where(column, '=', id)

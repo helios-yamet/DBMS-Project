@@ -1,4 +1,4 @@
-const reportcard = (knex) => (req, res) => {
+const getReportcard = (knex) => (req, res) => {
     const { id,year } = req.body;
 
     knex('Report Card')
@@ -10,5 +10,5 @@ const reportcard = (knex) => (req, res) => {
 }
 
 module.exports = {
-    reportcard: reportcard
+    getReportcard: getReportcard
 };

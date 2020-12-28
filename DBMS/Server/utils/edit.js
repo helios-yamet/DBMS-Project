@@ -40,7 +40,7 @@ else if(userType=='Admin'||userType=="Faculty")
 
 else 
 {
-    const {fname,lname,mname,contact,mail,id} =req.body
+    const {fname,lname,mname,job,contact,mail,id} =req.body
     knex('Guardians')
         .where('Contact Number', '=', id)
         .update({
@@ -48,7 +48,8 @@ else
             LName:lname,
             MName:mname,
             Contact Number:contact,
-            Email:mail
+            Email:mail,
+            Employment:job
         })
         .then(user => res.status(400))
         .catch(err => res.status(400).json("User not found"));   

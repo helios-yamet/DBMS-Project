@@ -1,4 +1,4 @@
-const Transport = (knex) => (req, res) => {
+const getTransport = (knex) => (req, res) => {
     const { busno } = req.body;
 
     knex('Transport')
@@ -10,5 +10,5 @@ const Transport = (knex) => (req, res) => {
 }
 
 module.exports = {
-    Transport: Transport
+    getTransport: getTransport
 };
