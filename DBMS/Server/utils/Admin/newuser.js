@@ -61,7 +61,7 @@ const Adduser = (knex)=>(req,res)=>{
         knex('Login')
         .insert({
             id:empID,
-            password:dob,
+            hash:dob,
         })
         .then(data=>{console.log("added to Login");res.status(400)})
         .catch(e=>console.log(e))
