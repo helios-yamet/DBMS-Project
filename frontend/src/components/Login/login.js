@@ -105,7 +105,7 @@ class Login extends React.Component {
                         absentdays: user['Absent Days'],
                         subjecttaught: user['Subject Taught'],
                     };
-                console.log(setUser);
+                console.log('HELLOOO', user['Student ID'], user['DOB']);
                 this.props.setSignedIn(true);
                  this.props.setUserType(this.state.userType);
                  this.props.loadUser(setUser);
