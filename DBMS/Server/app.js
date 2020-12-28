@@ -32,7 +32,7 @@ const {getFees,addFees}=require('./utils/Admin/fees')
 const {getTransport,addTransport}= require('./utils/Admin/transport')
 const admin_lib=require('./utils/Admin/library')
 const admin_newuser=require('./utils/Admin/newuser')
-const admin_teacher=require('./utils/Admin/teachers')
+const {addTeachers,getTeachers}=require('./utils/Admin/teachers')
 const admin_delete =require('./utils/Admin/deleteUser')
 
 const app= express();
