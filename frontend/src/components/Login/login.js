@@ -48,7 +48,6 @@ class Login extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
-                console.log(user);
                 let setUser = {};
                 if(this.state.userType === 'Student')
                     setUser = {
@@ -106,6 +105,7 @@ class Login extends React.Component {
                         absentdays: user['Absent Days'],
                         subjecttaught: user['Subject Taught'],
                     };
+                console.log(setUser);
                 this.props.setSignedIn(true);
                  this.props.setUserType(this.state.userType);
                  this.props.loadUser(setUser);
