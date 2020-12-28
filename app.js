@@ -50,7 +50,8 @@ const { Http2ServerRequest } = require("http2");
 app.use(express.json())
 app.use(cors())
 
-app.post('/',signinpage.handleSignin(knex))
+app.get("/", (req, res) =>  res.json('Server is running'));
+app.post("/signin", signin.handleSignin(knex));
 app.post('/admin/add-teacher',admin_teachers.addTeachers(knex))
 app.post('/admin/add-canteen',admin_canteen.addCanteen(knex))
 app.post('/admin/add-transport',admin_transport(knex))
