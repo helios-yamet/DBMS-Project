@@ -48,6 +48,7 @@ class Login extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
+                user =JSON.parse(user);
                 let setUser = {};
                 if(this.state.userType === 'Student')
                     setUser = {
