@@ -41,7 +41,7 @@ class Login extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userType: this.props.userType,
+                userType: this.state.userType,
                 id: this.state.username,
                 password: this.state.password,
             })
@@ -49,9 +49,66 @@ class Login extends React.Component {
             .then(res => res.json())
             .then(user => {
                 console.log(user);
-                 this.props.setSignedIn(true);
+                let setUser = {};
+                if(this.state.userType === 'Student')
+                    setUser = {
+                        id: user['Student ID'],
+                        phone: user['Contact Number'],
+                        fname: user['First Name'],
+                        mname: user['Middle Name'],
+                        lname: user['Last Name'],
+                        doj: user['Date of Admission'],
+                        dob: user['DOB'],
+                        bldg: user['Building Number'],
+                        street: user['Street Name'],
+                        area: user['Area'],
+                        standard: user['Grade'],
+                        section: user['Section'],
+                        busnum: user['Bus Number'],
+                        feepaid: user['Fee Paid'],
+                        absentdays: user['Days Absent'],
+                    };
+                    if(this.state.userType === 'Admin')
+                    setUser = {
+                        id: user['Employee ID'],
+                        phone: user['Contact Number'],
+                        fname: user['First_Name'],
+                        mname: user['Middle_Name'],
+                        lname: user['Last_Name'],
+                        doj: user['Date of Joining'],
+                        dob: user['DofB'],
+                        bldg: user['Building Number'],
+                        street: user['Street Name'],
+                        area: user['Area'],
+                        salary: user['Salary'],
+                        maritalstatus: user['Marital Status'],
+                        busnum: user['Bus Number'],
+                        supervisor: user['Supervisor'],
+                        absentdays: user['Absent Days'],
+                        role: user['Role'],
+                    };
+                if (this.state.userType === 'Faculty')
+                    setUser = {
+                        id: user['Employee ID'],
+                        phone: user['Contact Number'],
+                        fname: user['First_Name'],
+                        mname: user['Middle_Name'],
+                        lname: user['Last_Name'],
+                        doj: user['Date of Joining'],
+                        dob: user['DOB'],
+                        bldg: user['Building Number'],
+                        street: user['Street Name'],
+                        area: user['Area'],
+                        salary: user['Salary'],
+                        maritalstatus: user['Marital Status'],
+                        busnum: user['Bus Number'],
+                        supervisor: user['Supervisor'],
+                        absentdays: user['Absent Days'],
+                        subjecttaught: user['Subject Taught'],
+                    };
+                this.props.setSignedIn(true);
                  this.props.setUserType(this.state.userType);
-                 this.props.loadUser(user);
+                 this.props.loadUser(setUser);
                  this.props.onRouteChange(`/user-home`);
              });
 
