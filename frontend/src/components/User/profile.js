@@ -3,6 +3,7 @@ import React from "react";
 class Profile extends React.Component {
     render() {
         const {user, userType} = this.props;
+        console.log(user);
         return(
             <section class="pa3 pa5-ns">
                 <article class="hide-child relative mw5 center">
