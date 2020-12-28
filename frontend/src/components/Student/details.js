@@ -10,7 +10,7 @@ class StudentDetails extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/getFees",{
+        fetch("http://localhost:3001/student/extracurricular",{
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ class StudentDetails extends React.Component {
                     <div class="pa3 bt b--black-10">
                         <dl class="lh-title ph4 mt0">
                         {
-                                this.state.subjects.map(sub => <dt class="f5 b mv1">{sub}</dt>)
+                                this.state.subjects.forEach(sub => <dt class="f5 b mv1">{sub}</dt>)
                         }
                             
                         </dl>
@@ -70,7 +70,7 @@ class StudentDetails extends React.Component {
                         <dl class="lh-title ph4 mt0">
                             {
                                 this.state.clubs.length > 0 ? 
-                                    this.state.clubs.map(club => <dt class="f5 b mv1">{club}</dt>) 
+                                    this.state.clubs.forEach(club => <dt class="f5 b mv1">{club}</dt>) 
                                 : 
                                     <dt class="f5 b mv1">-NA-</dt>
                             }

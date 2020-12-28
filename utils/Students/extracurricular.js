@@ -3,17 +3,17 @@ const getExtraCurricular = (knex) => (req, res) => {
 
 
     knex("Subjects")
-        .select("Subject Name")
-        .join('students',function(){
+        .select("Subject")
+        .join('Students',function(){
             this
             .on('Students.Grade','=','Subjects.Grade')
-            .on('Students.Section','=','Subjects.Section')
+            .andOn('Students.Section','=','Subjects.Section')
         }).then(function(subs){
-            knex('Part Of')
+            knex('Part of')
             .select('Club')
-            .where('Student ID','=',id)
-            .then(clubs=>res.json({subjectss:subs[0],clubs:clubs[0]}))
-            .catch(e=>{console.log("cannot find clubs");res.json({subjectss:subs[0],clubs:[]})})
+            .where('Student','=',id)
+            .then(clubs=>res.json({subjects:subs,clubs:clubs}))
+            .catch(e=>{console.log("cannot find clubs");res.json({subjects:subs,clubs:[]})})
         })
         .catch(console.log("Can't get subjects"))
 }

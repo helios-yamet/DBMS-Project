@@ -66,7 +66,7 @@ app.get('/admin/library',admin_lib.library(knex))
 app.post('/teacher/add-reportcard',teacher_add_reportcard.AddReportCard(knex))
 app.get('/teacher/classroom',teacher_get_class.GetClassroom(knex))
 
-app.get('/student/extracurricular',student_extracurricular.getExtraCurricular(knex))
+app.post('/student/extracurricular',student_extracurricular.getExtraCurricular(knex))
 app.post('/student/fees',student_fee.getFees(knex))
 app.post('/student/library',student_lib.getLibrarydues(knex))
 app.post('/student/reportcard',student_report.getReportcard(knex))
