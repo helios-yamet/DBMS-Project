@@ -1,0 +1,24 @@
+DBMS Functionalities
+
+> Login (Student, Teacher, Admin)
+
+> Student
+	> View and edit profile (with attendance)	DONE
+	> Courses, marks (report card) and fees		DONE
+	> Library and transportation			DONE
+	> Extracurricular				DONE
+
+> Teacher 	
+	> View and edit profile (with absent days)	DONE
+	> If incharge of extracurricular activity, then add details of the activity
+							DONE
+	> If class teacher then add classroom details and allow teacher to view and edit the student report card
+							DONE
+	> Library and transportation			DONE
+
+> Admin
+	> View and edit profile
+	> Add student/teacher/department
+	> Canteen, Transportation, Library, Fee Structure
+
+* Edit only commmon details
