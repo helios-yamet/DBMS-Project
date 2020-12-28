@@ -12,7 +12,7 @@ const addCanteen = (knex)=>(req,res)=>{
     knex('Canteen')
         .insert({
            Supplier:supplier,
-            Meal Name:meal,
+            ["Meal Name"]:meal,
             Price: price,
         })
         .then(data=>{console.log("added to database");res.status(400)})

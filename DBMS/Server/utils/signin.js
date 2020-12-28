@@ -18,10 +18,10 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
         column="Contact Number"
     }
 
-    knex.select('id', 'hash'). from('Login')
+    knex.select('id', 'hash'). from('login')
     .where('id', '=', id)
     .then(data => {
-        console.log("recieved"+data[0]+'\n');
+        console.log(data[0]);
         if(password==data[0].hash) {
             console.log('logged in');
             return knex.select('*'). from(table)

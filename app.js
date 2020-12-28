@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const console =require('console')
 const cors = require("cors");
 const bodyParser=require("body-parser")
-/*const knex = require('knex')({
+const knex = require('knex')({
     client: 'pg',
     connection: {
         host: '127.0.0.1',
@@ -12,15 +12,15 @@ const bodyParser=require("body-parser")
         password: '1234',
         database: 'School'
     }
-});*/
-const knex = require('knex')({
+});
+/*const knex = require('knex')({
     client: 'pg',
     connection: {
         connectionString=process.env.DATABASE_URL,
         ssl=true,
 
     }
-});
+});*/
 
 const signinpage = require('./utils/signin')
 const edit = require('./utils/edit')
@@ -43,22 +43,20 @@ const admin_teachers=require('./utils/Admin/teachers')
 const admin_delete =require('./utils/Admin/deleteUser')
 
 const app= express();
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin": "*")
-  })
+
 const { Http2ServerRequest } = require("http2");
 app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) =>  res.json('Server is running'));
-app.post("/signin", signin.handleSignin(knex));
+app.post("/signin", signinpage.handleSignin(knex));
 app.post('/admin/add-teacher',admin_teachers.addTeachers(knex))
 app.post('/admin/add-canteen',admin_canteen.addCanteen(knex))
-app.post('/admin/add-transport',admin_transport(knex))
+app.post('/admin/add-transport',admin_transport.addTransport(knex))
 app.post('/admin/add-fees',admin_fees.addFees(knex))
 app.post('/admin/new-user',admin_newuser.Adduser(knex))
 app.post('/admin/delete-user',admin_delete.DeleteUser(knex))
-app.post('/admin/edit-details',edit(knex))
+app.post('/admin/edit-details',edit.Edituser(knex))
 app.get('/admin/view-teacher',admin_teachers.getTeachers(knex))
 app.get('/admin/view-canteen',admin_canteen.getCanteen(knex))
 app.get('/admin/view-transport',admin_transport.getTransport(knex))

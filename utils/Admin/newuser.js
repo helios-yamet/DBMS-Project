@@ -6,19 +6,19 @@ const Adduser = (knex)=>(req,res)=>{
         const {contact,ID,fname,mname,lname,admission,dob,street,area,bldgno,absent,paid,busno,grade,section}=req.body
         knex('Students')
         .insert({
-           Contact Number:contact,
-            Student ID:ID,
-            First Name: fname,
-            Last Name:lname,
-            Middle Name:mname,
-            Date of Admission:admission,
+           ["Contact Number"]:contact,
+            ["Student ID"]:ID,
+            ["First Name"]: fname,
+            ["Last Name"]:lname,
+            ["Middle Name"]:mname,
+            ["Date of Admission"]:admission,
             DOB: dob,
-            Street Name:street,
+            ["Street Name"]:street,
             Area:area,
-            Building Number:bldgno,
-            Days Absent:absent,
-            Fee Paid: paid,
-            Bus Number: busno,
+            ["Building Number"]:bldgno,
+            ["Days Absent"]:absent,
+            ["Fee Paid"]: paid,
+            ["Bus Number"]: busno,
             Grade:grade,
             Section:section
         })
@@ -38,22 +38,22 @@ const Adduser = (knex)=>(req,res)=>{
         const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,supervisor,sub,busno,marital,bldgno}=req.body   
         knex('Employees')
         .insert({
-            Employee ID:empID,
-            Absent Days:absent,
-            Contact Number: number,
+            ["Employee ID"]:empID,
+            ["Absent Days"]:absent,
+            ["Contact Number"]: number,
             First_Name:fname,
             Middle_Name:mname,
             Last_Name:lname,
             DofB:dob,
-            Date of Joining:doj,
+            ["Date of Joining"]:doj,
             Salary: salary,
-            Street Name: street,
+            ["Street Name"]: street,
             Area: area,
-            Building Number: bldgno,
+            ["Building Number"]: bldgno,
             Supervisor:supervisor,
-            Subject Taught: sub,
-            Bus Number: busno,
-            Marital Status:marital
+            ["Subject Taught"]: sub,
+            ["Bus Number"]: busno,
+            ["Marital Status"]:marital
         })
         .then(data=>{console.log("added to Employees");res.status(400)})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
@@ -71,22 +71,22 @@ const Adduser = (knex)=>(req,res)=>{
         const {empID,absent,number,mname,lname,dob,doj,salary,street,area,role,supervisor,busno,bldgno,marital}   = req.body
         knex('Employees')
         .insert({
-            Employee ID:empID,
-            Absent Days:absent,
-            Contact Number: number,
+            ["Employee ID"]:empID,
+            ["Absent Days"]:absent,
+            ["Contact Number"]: number,
             First_Name:fname,
             Middle_Name:mname,
             Last_Name:lname,
             DofB:dob,
-            Date of Joining:doj,
+            ["Date of Joining"]:doj,
             Salary: salary,
-            Street Name: street,
+            ["Street Name"]: street,
             Area: area,
-            Building Number: bldgno,
+            ["Building Number"]: bldgno,
             Role: role,
             Supervisor:supervisor,
-            Bus Number: busno,
-            Marital Status:marital
+            ["Bus Number"]: busno,
+            ["Marital Status"]:marital
         })
         .then(data=>{console.log("added to Employees");res.status(400)})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
@@ -104,7 +104,7 @@ const Adduser = (knex)=>(req,res)=>{
         const {contact, fname,lname,mname,job,mail,ID} =req.body
         knex('Guardians')
         .insert({
-           Contact Number:contact,
+           ["Contact Number"]:contact,
             FName:fname,
             LName : lname,
             MName:mname,
@@ -116,8 +116,8 @@ const Adduser = (knex)=>(req,res)=>{
 
         knex('Guardians of')
         .insert({
-            Contact Number:contact,
-            Student ID:ID,
+            ["Contact Number"]:contact,
+            ["Student ID"]:ID,
         })
         .then(data=>{console.log("added to databse");res.status(400)})
         .catch(e=>{console.log("error adding to Guardian of\n"+e)});
