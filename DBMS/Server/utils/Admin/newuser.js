@@ -23,7 +23,15 @@ const Adduser = (knex)=>(req,res)=>{
             Section:section
         })
         .then(data=>{console.log("added to database");res.status(400)})
-        .catch(e=>{console.log("error adding to Report Card\n"+e)});        
+        .catch(e=>{console.log("error adding to Students\n"+e)});        
+
+        knex('Login')
+        .insert({
+            id:ID,
+            password:dob,
+        })
+        .then(data=>{console.log("added to Login");res.status(400)})
+        .catch(e=>console.log(e))
     }
     else if(userType=='Faculty')
     {
@@ -49,6 +57,14 @@ const Adduser = (knex)=>(req,res)=>{
         })
         .then(data=>{console.log("added to Employees");res.status(400)})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
+
+        knex('Login')
+        .insert({
+            id:empID,
+            password:dob,
+        })
+        .then(data=>{console.log("added to Login");res.status(400)})
+        .catch(e=>console.log(e))
     }
     else if(userType=='Admin')
     {
@@ -73,6 +89,14 @@ const Adduser = (knex)=>(req,res)=>{
         })
         .then(data=>{console.log("added to Employees");res.status(400)})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
+
+        knex('Login')
+        .insert({
+            id:empID,
+            password:dob,
+        })
+        .then(data=>{console.log("added to Login");res.status(400)})
+        .catch(e=>console.log(e))
     }
     else
     {
@@ -95,7 +119,14 @@ const Adduser = (knex)=>(req,res)=>{
             Student ID:ID,
         })
         .then(data=>{console.log("added to databse");res.status(400)})
-        .catch(e=>{console.log("error adding to Report Card\n"+e)});
+        .catch(e=>{console.log("error adding to Guardian of\n"+e)});
+        knex('Login')
+        .insert({
+            id:contact,
+            password:DOB,
+        })
+        .then(data=>{console.log("added to Login");res.status(400)})
+        .catch(e=>console.log(e))
 
     }
 }
