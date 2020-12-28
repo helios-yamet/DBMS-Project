@@ -1,24 +1,24 @@
 import React from "react";
 
-const user = {
-    id: 0,
-    fname: 'a',
-    mname: 'b',
-    lname: 'c',
-    phone: 768454,
-    email: 'test@email.com',
-    bldg: '9635',
-    street: 'Rock Maple',
-    area: 'Hoboken',
-    dob: '2006-06-26',
-    standard: 0,
-    maritalstatus: 'Single',
-    section: 'B',
-    subjecttaught: 'Fun',
-    doj: '1999-09-10',
-    absentdays: 0,
-    role: 'Being awesome'
-};
+// const user = {
+//     id: 0,
+//     fname: 'a',
+//     mname: 'b',
+//     lname: 'c',
+//     phone: 768454,
+//     email: 'test@email.com',
+//     bldg: '9635',
+//     street: 'Rock Maple',
+//     area: 'Hoboken',
+//     dob: '2006-06-26',
+//     standard: 0,
+//     maritalstatus: 'Single',
+//     section: 'B',
+//     subjecttaught: 'Fun',
+//     doj: '1999-09-10',
+//     absentdays: 0,
+//     role: 'Being awesome'
+// };
 
 class Login extends React.Component {
     constructor() {
@@ -48,7 +48,7 @@ class Login extends React.Component {
         })
             .then(res => res.json())
             .then(user => {
-                user =JSON.parse(user);
+                // user = JSON.parse(user);
                 let setUser = {};
                 if(this.state.userType === 'Student')
                     setUser = {
