@@ -3,10 +3,10 @@ const AddReportCard = (knex)=>(req,res)=>{
 
     knex('Report Card')
         .insert({
-            Subject ID:subject,
-            Student ID:ID,
-            Academic Year: academic_year,
-            Teacher comments:remarks,
+            ["Subject ID"]:subject,
+           ["Student ID"]:ID,
+            ["Academic Year"]: academic_year,
+            ["Teacher comments"]:remarks,
             Subject_Grade:subject_grade
         })
         .then(data=>{console.log("added to databse");res.status(400)})

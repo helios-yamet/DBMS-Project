@@ -6,13 +6,13 @@ if(userType=="Student")
     knex('Student')
         .where('Student ID', '=', id)
         .update({
-            First Name:fname,
-            Last Name:lname,
-            Middle Name:mname,
-            Contact Number:contact,
-            Building Number:bldgno,
+           [ "First Name"]:fname,
+            ["Last Name"]:lname,
+            ["Middle Name"]:mname,
+            ["Contact Number"]:contact,
+            ["Building Number"]:bldgno,
             Area:area,
-            Street Name:street,
+            ["Street Name"]:street,
             DOB: dob
         })
         .then(user => res.status(400))
@@ -27,12 +27,12 @@ else if(userType=='Admin'||userType=="Faculty")
             First_Name:fname,
             Last_Name:lname,
             Middle_Name:mname,
-            Contact Number:contact,
-            Building Number:bldgno,
+            ["Contact Number"]:contact,
+            ["Building Number"]:bldgno,
             Area:area,
-            Street Name:street,
+            ["Street Name"]:street,
             DofB: dob,
-            Marital Status: marital
+            ["Marital Status"]: marital
         })
         .then(user => res.status(400))
         .catch(err => res.status(400).json("User not found"));   
@@ -47,7 +47,7 @@ else
             FName:fname,
             LName:lname,
             MName:mname,
-            Contact Number:contact,
+            ["Contact Number"]:contact,
             Email:mail,
             Employment:job
         })

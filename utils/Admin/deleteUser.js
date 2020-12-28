@@ -1,7 +1,7 @@
 const DeleteUser = (knex) => (req, res) => {
     const {id} =req.body
     var count;
-    var contact=await knex('Guardians of')
+    var contact= knex('Guardians of')
     .where("Student ID",'=',id).del()
     .returning('Contact Number')
     .then(t=>{
