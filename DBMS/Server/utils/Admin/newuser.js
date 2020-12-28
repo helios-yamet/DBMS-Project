@@ -35,7 +35,7 @@ const Adduser = (knex)=>(req,res)=>{
     }
     else if(userType=='Faculty')
     {
-        const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,supervisor,sub,busno,marital}=req.body   
+        const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,supervisor,sub,busno,marital,bldgno}=req.body   
         knex('Employees')
         .insert({
             Employee ID:empID,
@@ -68,7 +68,7 @@ const Adduser = (knex)=>(req,res)=>{
     }
     else if(userType=='Admin')
     {
-        const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,role,supervisor,busno}   = req.body
+        const {empID,absent,number,mname,lname,dob,doj,salary,street,area,role,supervisor,busno,bldgno,marital}   = req.body
         knex('Employees')
         .insert({
             Employee ID:empID,
@@ -85,7 +85,8 @@ const Adduser = (knex)=>(req,res)=>{
             Building Number: bldgno,
             Role: role,
             Supervisor:supervisor,
-            Bus Number: busno
+            Bus Number: busno,
+            Marital Status:marital
         })
         .then(data=>{console.log("added to Employees");res.status(400)})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
