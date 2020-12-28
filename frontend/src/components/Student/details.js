@@ -10,20 +10,27 @@ class StudentDetails extends React.Component {
     }
 
     componentDidMount() {
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: this.props.user.id,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        fetch("http://localhost:3001/getFees",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.user.id,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    subjects: data.subjects.forEach(sub => sub['Subject'])
+                });
+                this.setState({
+                    clubs: data.clubs === [] ? [] : data.clubs.forEach(club => club['Club'])
+                });
+            });
 
-        this.setState({ subjects: ['Computer Science', 'Chemistry', 'English', 'Physics', 'Mathematics'] });
-        this.setState({ clubs: ['Red Cross', 'Blue Cross'] });
+        // this.setState({ subjects: ['Computer Science', 'Chemistry', 'English', 'Physics', 'Mathematics'] });
+        // this.setState({ clubs: ['Red Cross', 'Blue Cross'] });
     }
 
     render() {
