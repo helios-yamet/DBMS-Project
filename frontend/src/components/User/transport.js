@@ -12,19 +12,19 @@ class Transport extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         
-        this.setState({ show: true });
+        
     
-          // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         busno: this.state.busnum,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(busDetails => console.log(busDetails));
+          fetch("http://localhost:3001/student/transport",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                busno: this.state.busnum,
+            })
+        })
+            .then(res => res.json())
+            .then(busDetails => {console.log(busDetails["First_Name"]);this.setState({ busDetails: { route: busDetails['Route'], fees: busDetails['Fees'],  } });this.setState({driver:busDetails['First_Name']});this.setState({ show: true });});
 
         document.getElementById("myform").reset();
     }
@@ -33,7 +33,7 @@ class Transport extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    render() {
+    render() {console.log(this.state)
         return (
             <div>
                 <div className="ma4 pa4-l">
@@ -66,15 +66,15 @@ class Transport extends React.Component {
                             <h1>Details</h1>
                             <dl className="dib mr5">
                                 <dd className="f6 f5-ns b ml0">Driver Name</dd>
-                                <dd className="f3 f2-ns b ml0">Sandy Slater</dd>
+                                <dd className="f3 f2-ns b ml0">{this.state.driver}</dd>
                             </dl>
                             <dl className="dib mr5">
                                 <dd className="f6 f5-ns b ml0">Bus Fees</dd>
-                                <dd className="f3 f2-ns b ml0">Dhs. 150</dd>
+                                <dd className="f3 f2-ns b ml0">{this.state.busDetails.fees}</dd>
                             </dl>
                             <dl className="dib mr5">
                                 <dd className="f6 f5-ns b ml0">Route</dd>
-                                <dd className="f3 f2-ns b ml0">TCA</dd>
+                                <dd className="f3 f2-ns b ml0">{this.state.busDetails.route}</dd>
                             </dl>
                         </article>
                     </div>
