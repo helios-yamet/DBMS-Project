@@ -6,7 +6,7 @@ class ParentLogin extends React.Component {
         this.state = {
             username: '',
             password: '',
-            userType: 'Parent'
+            // userType: 'Parent'
         };
     }
 
@@ -21,7 +21,7 @@ class ParentLogin extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userType: this.state.userType,
+                // userType: this.state.userType,
                 id: this.state.username,
                 password: this.state.password,
             })
@@ -29,14 +29,15 @@ class ParentLogin extends React.Component {
             .then(res => res.json())
             .then(user => {
                 const setUser = {
-                        id: this.state.password,
-                        phone: user[0]['Contact Number'],
-                        fname: user[0]['FName'],
-                        mname: user[0]['MName'],
-                        lname: user[0]['LName'],
-                        email: user[0]['Email'],
-                        company: user[0]['Employment'],
-                    };
+                    userType: user[0]['userType'],
+                    id: this.state.password,
+                    phone: user[0]['Contact Number'],
+                    fname: user[0]['FName'],
+                    mname: user[0]['MName'],
+                    lname: user[0]['LName'],
+                    email: user[0]['Email'],
+                    company: user[0]['Employment'],
+                };
                 
                 
                 this.props.setSignedIn(true);

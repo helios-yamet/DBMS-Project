@@ -1,25 +1,5 @@
 import React from "react";
 
-// const user = {
-//     id: 0,
-//     fname: 'a',
-//     mname: 'b',
-//     lname: 'c',
-//     phone: 768454,
-//     email: 'test@email.com',
-//     bldg: '9635',
-//     street: 'Rock Maple',
-//     area: 'Hoboken',
-//     dob: '2006-06-26',
-//     standard: 0,
-//     maritalstatus: 'Single',
-//     section: 'B',
-//     subjecttaught: 'Fun',
-//     doj: '1999-09-10',
-//     absentdays: 0,
-//     role: 'Being awesome'
-// };
-
 class Login extends React.Component {
     constructor() {
         super();
@@ -41,7 +21,7 @@ class Login extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userType: this.state.userType,
+                // userType: this.state.userType,
                 id: this.state.username,
                 password: this.state.password,
             })
@@ -52,6 +32,7 @@ class Login extends React.Component {
                 let setUser = {};
                 if(this.state.userType === 'Student')
                     setUser = {
+                        userType: user['userType'],
                         id: user['Student ID'],
                         phone: user['Contact Number'],
                         fname: user['First Name'],
@@ -70,6 +51,7 @@ class Login extends React.Component {
                     };
                     if(this.state.userType === 'Admin')
                     setUser = {
+                        userType: user['userType'],
                         id: user['Employee ID'],
                         phone: user['Contact Number'],
                         fname: user['First_Name'],
@@ -89,6 +71,7 @@ class Login extends React.Component {
                     };
                 if (this.state.userType === 'Faculty')
                     setUser = {
+                        userType: user['userType'],
                         id: user['Employee ID'],
                         phone: user['Contact Number'],
                         fname: user['First_Name'],
@@ -138,7 +121,7 @@ class Login extends React.Component {
                                 onChange={this.onChange}
                             />
                         </div>
-                        <div className="mv3">
+                        {/* <div className="mv3">
                             <label className="db fw6 lh-copy f6" for="type">User Type</label>
                             <select className="b pa2 input-reset ba bg-transparent w-100" 
                                 name="userType"
@@ -148,7 +131,7 @@ class Login extends React.Component {
                                 <option value="Admin">Admin</option>
                                 <option value="Faculty">Faculty</option>
                             </select>
-                        </div>
+                        </div> */}
                     </fieldset>
                                 
                     <div className="">
