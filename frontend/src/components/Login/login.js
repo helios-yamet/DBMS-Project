@@ -108,15 +108,12 @@ class Login extends React.Component {
                     };
                 console.log('HELLOOO', user['Student ID'], user['DOB']);
                 this.props.setSignedIn(true);
-                 this.props.setUserType(this.state.userType);
-                 this.props.loadUser(setUser);
-                //  this.props.onRouteChange(`/user-home`);
+                this.props.setUserType(this.state.userType);
+                this.props.loadUser(setUser);
+                this.props.onRouteChange(`/user-home`);
              });
 
-        // this.props.setSignedIn(true);
-        // this.props.setUserType(this.state.userType);
-        // this.props.loadUser(user);
-        // this.props.onRouteChange(`/user-home`);
+        
     }
 
     render() {

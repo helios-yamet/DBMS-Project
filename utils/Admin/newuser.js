@@ -23,17 +23,19 @@ const Adduser = (knex)=>(req,res)=>{
             Grade:grade,
             Section:section
         })
-        .then(data=>{console.log("added to database");res.status(400)})
+        .then(data=>{console.log("added to database");
+            knex('Login')
+            .insert({
+                id:ID,
+                hash:dob,
+            })
+            .then(data=>{console.log("added to Login")})
+            .catch(e=>console.log(e));
+    
+    })
         .catch(e=>{console.log("error adding to Students\n"+e)});        
 
-        knex('Login')
-        .insert({
-            id:ID,
-            hash:dob,
-        })
-        .then(data=>{console.log("added to Login");res.status(400)})
-        .catch(e=>console.log(e))
-    }
+}    
     else if(userType=='Faculty')
     {
         const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,supervisor,sub,busno,marital,bldgno}=req.body   
@@ -56,16 +58,18 @@ const Adduser = (knex)=>(req,res)=>{
             ["Bus Number"]: busno,
             ["Marital Status"]:marital
         })
-        .then(data=>{console.log("added to Employees");res.status(400)})
+        .then(data=>{console.log("added to Employees");
+                            knex('Login')
+                            .insert({
+                                id:empID,
+                                hash:dob,
+                            })
+        .then(data=>{console.log("added to Login");})
+        .catch(e=>console.log(e))
+            })
         .catch(e=>{console.log("error adding to Employees\n"+e)});
 
-        knex('Login')
-        .insert({
-            id:empID,
-            hash:dob,
-        })
-        .then(data=>{console.log("added to Login");res.status(400)})
-        .catch(e=>console.log(e))
+
     }
     else if(userType=='Admin')
     {
@@ -89,16 +93,17 @@ const Adduser = (knex)=>(req,res)=>{
             ["Bus Number"]: busno,
             ["Marital Status"]:marital
         })
-        .then(data=>{console.log("added to Employees");res.status(400)})
+        .then(data=>{console.log("added to Employees");
+            knex('Login')
+            .insert({
+                id:empID,
+                hash:dob,
+            })
+        .then(data=>{console.log("added to Login");})
+        .catch(e=>console.log(e))})
         .catch(e=>{console.log("error adding to Employees\n"+e)});
 
-        knex('Login')
-        .insert({
-            id:empID,
-            hash:dob,
-        })
-        .then(data=>{console.log("added to Login");res.status(400)})
-        .catch(e=>console.log(e))
+        
     }
     else
     {
@@ -112,23 +117,25 @@ const Adduser = (knex)=>(req,res)=>{
             Employment:job,
             Email:mail
         })
-        .then(data=>{console.log("added to database");res.status(400)})
-        .catch(e=>{console.log("error adding to guardians\n"+e)});
-
-        knex('Guardians of')
+        .then(data=>{console.log("added to guardians");
+        knex('Guardian of')
         .insert({
             ["Contact Number"]:contact,
             ["Student ID"]:ID,
         })
-        .then(data=>{console.log("added to databse");res.status(400)})
+        .then(data=>{console.log("added to guardians of");})
         .catch(e=>{console.log("error adding to Guardian of\n"+e)});
+    })
+        .catch(e=>{console.log("error adding to guardians\n"+e)});
+
+        
         knex('Login')
         .insert({
-            id:ID,
-            hash:DOB,
+            id:contact,
+            hash:ID,
         })
-        .then(data=>{console.log("added to Login");res.status(400)})
-        .catch(e=>console.log(e))
+        .then(data=>{console.log("added to Login");})
+        .catch(e=>console.log(e,"login table"))
 
     }
 }
