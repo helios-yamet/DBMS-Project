@@ -19,7 +19,7 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
         column="Contact Number"
     }
 
-    knex.select('id', 'hash'). from('Login')
+    knex.select('*'). from('Login')
     .where('id', '=', id)
     .then(data => {
         console.log("recieved ",data[0],'\n');
@@ -29,6 +29,7 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
             return knex.select('*'). from(table)
                 .where(column, '=', id)
                 .then(user => {
+                    user[0]["userType"]=data[0]["userType"]
                     console.log(user);
                     res.json(user[0]);
                 })
