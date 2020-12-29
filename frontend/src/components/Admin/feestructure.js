@@ -1,3 +1,4 @@
+
 import React from "react";
 var array = []
 
@@ -33,8 +34,22 @@ class FeeStructure extends React.Component {
         console.log(event.target.name);
 
         const pos = newdetails.findIndex(d => `${d.standard} ${d.section}` === event.target.name);
-        newdetails.splice(pos, 1);
 
+        fetch("http://localhost:3001/admin/delete-item", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                table: 'Fees',
+                key1: newdetails[pos].standard,
+                key2: newdetails[pos].section,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        newdetails.splice(pos, 1);
         console.log(pos, newdetails);
         this.setState({ details: newdetails });
     }
@@ -49,7 +64,24 @@ class FeeStructure extends React.Component {
         for (let i = 0; i < newdetails.length; i++) {
             if(`${newdetails[i].standard} ${newdetails[i].section}` === event.target.name)
                 if (!isNaN(parseFloat(newamount)))
+                {
                     newdetails[i].fees = parseFloat(newamount);
+                    fetch("http://localhost:3001/admin/modify-item", {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            table: 'Fees',
+                            key1: newdetails[i].standard,
+                            key2: newdetails[i].section,
+                            value: newdetails[i].fees,
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data));
+                    break;
+                }
         }
 
         this.setState({ details: newdetails });

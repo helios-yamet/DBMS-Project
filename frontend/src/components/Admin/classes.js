@@ -19,6 +19,22 @@ class ClassesList extends React.Component {
 
         let newdetails = this.state.details;
         console.log(event.target.name);
+
+        fetch("http://localhost:3001/admin/delete-item", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                table: 'Subjects',
+                key1: newdetails[event.target.name].standard,
+                key2: newdetails[event.target.name].section,
+                key3: newdetails[event.target.name].subject,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
         newdetails.splice(event.target.name, 1);
         console.log(newdetails);
         this.setState({ details: newdetails });

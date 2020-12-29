@@ -13,10 +13,10 @@ const addFees = (knex)=>(req,res)=>{
         .insert({
            Grade:grade,
            Section:section,
-           Fees:fees
+           Fee:fees
         })
-        .then(data=>{console.log("added to database");res.status(400)})
-        .catch(e=>{console.log("error adding to Canteen\n"+e)});
+        .then(data=>{console.log("added to Fees");res.status(400)})
+        .catch(e=>{console.log("error adding to Fees\n"+e)});
 }
 
 module.exports = {

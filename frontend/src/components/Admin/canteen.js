@@ -17,7 +17,22 @@ class CanteenList extends React.Component {
         event.preventDefault();
 
         let newCanteen = this.state.details;
-        console.log(event.target.name);
+        console.log(newCanteen[event.target.name]);
+
+        fetch("http://localhost:3001/admin/delete-item", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                table: 'Canteen',
+                pk: 'Supplier',
+                key: newCanteen[event.target.name].supplier,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
         newCanteen.splice(event.target.name, 1);
         console.log(newCanteen);
         this.setState({ canteen: newCanteen });        
@@ -95,7 +110,7 @@ class CanteenList extends React.Component {
                                 <label className="clip" for="library">Meal Details</label>
                                 <div className="flex justify-between">
                                     <input className="mr2 f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
-                                        placeholder="Meal Name"
+                                        placeholder="Cuisine"
                                         type="text"
                                         name="mealname"
                                         onChange={this.onChange}
@@ -129,7 +144,7 @@ class CanteenList extends React.Component {
                         <thead>
                             <tr class="stripe-dark">
                                 <th class="fw6 tl pa3 bg-white">Supplier</th>
-                                <th class="fw6 tl pa3 bg-white">Meal Name</th>
+                                <th class="fw6 tl pa3 bg-white">Cuisine</th>
                                 <th class="fw6 tl pa3 bg-white">Price</th>
                                 <th class="fw6 tl pa3 bg-white">Remove Item</th>
                             </tr>

@@ -16,7 +16,7 @@ console.log(req.body)
             ["Street Name"]:street,
             DOB: dob
         })
-        .then(user => res.status(400))
+        .then(user => {})
         .catch(err => console.log(err));
 }
 else if(userType=='Admin'||userType=="Faculty")
@@ -35,7 +35,7 @@ else if(userType=='Admin'||userType=="Faculty")
             DofB: dob,
             ["Marital Status"]: marital
         })
-        .then(user => res.status(400))
+        .then(user => {})
         .catch(err => console.log(err));   
 }
 
@@ -52,7 +52,7 @@ else
             Email:mail,
             Employment:job
         })
-        .then(user => res.status(400))
+        .then(user => res.status(200))
         .catch(err => console.log(err));   
 }
 }

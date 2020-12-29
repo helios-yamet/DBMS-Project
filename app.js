@@ -41,7 +41,8 @@ const admin_lib=require('./utils/Admin/library')
 const admin_newuser=require('./utils/Admin/newuser')
 const admin_teachers=require('./utils/Admin/teachers')
 const admin_delete =require('./utils/Admin/deleteUser')
-
+const admin_item_remove=require('./utils/Admin/remove')
+const admin_item_modify=require('./utils/Admin/modify')
 const app= express();
 
 const { Http2ServerRequest } = require("http2");
@@ -62,6 +63,8 @@ app.get('/admin/view-canteen',admin_canteen.getCanteen(knex))
 app.get('/admin/view-transport',admin_transport.getTransport(knex))
 app.get('/admin/view-fees',admin_fees.getFees(knex))
 app.get('/admin/library',admin_lib.library(knex))
+app.post('/admin/delete-item',admin_item_remove.DeleteItem(knex))
+app.post('/admin/modify-item',admin_item_modify.ModifyItem(knex))
 
 app.post('/teacher/add-reportcard',teacher_add_reportcard.AddReportCard(knex))
 app.post('/teacher/classroom',teacher_get_class.GetClassroom(knex))

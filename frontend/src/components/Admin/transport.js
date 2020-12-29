@@ -32,8 +32,22 @@ class TransportList extends React.Component {
         console.log(event.target.name);
 
         const pos = newdetails.findIndex(d => `${d.busnum}` === event.target.name);
-        newdetails.splice(pos, 1);
 
+        fetch("http://localhost:3001/admin/delete-item", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                table: 'Transport',
+                pk: 'Bus Number',
+                key1: newdetails[pos].busnum,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        newdetails.splice(pos, 1);
         console.log(pos, newdetails);
         this.setState({ details: newdetails });
     }
@@ -48,7 +62,23 @@ class TransportList extends React.Component {
         for (let i = 0; i < newdetails.length; i++) {
             if (newdetails[i].busnum === parseInt(event.target.name))
                 if (!isNaN(parseInt(newamount)))
+                {
                     newdetails[i].fees = parseInt(newamount);
+                    fetch("http://localhost:3001/admin/modify-item", {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            table: 'Transport',
+                            key1: newdetails[i].busnum,
+                            value: newdetails[i].fees,
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data));
+                    break;
+                }
         }
 
         this.setState({ details: newdetails });
