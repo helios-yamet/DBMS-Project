@@ -21,11 +21,22 @@ class StudentDetails extends React.Component {
         })
             .then(res => res.json())
             .then(data => {
+                let subjs = [];
+                let clubs = [];
+                for (let i = 0; i < data.subjects.length; i++) {
+                    subjs.push(data.subjects[i]["Subject"]);
+                    
+                }
+                for (let i = 0; i < data.clubs.length; i++) {
+                    clubs.push(data.clubs[i]["Club"]);
+                    
+                }
+                    console.log(data.clubs,data.subjects,subjs,clubs)
                 this.setState({
-                    subjects: data.subjects.forEach(sub => sub['Subject'])
+                    subjects: subjs
                 });
                 this.setState({
-                    clubs: data.clubs === [] ? [] : data.clubs.forEach(club => club['Club'])
+                    clubs: clubs
                 });
             });
 
@@ -55,7 +66,7 @@ class StudentDetails extends React.Component {
                     <div class="pa3 bt b--black-10">
                         <dl class="lh-title ph4 mt0">
                         {
-                                this.state.subjects.forEach(sub => <dt class="f5 b mv1">{sub}</dt>)
+                                this.state.subjects.map(sub => <dt class="f5 b mv1">{sub}</dt>)
                         }
                             
                         </dl>
@@ -70,7 +81,7 @@ class StudentDetails extends React.Component {
                         <dl class="lh-title ph4 mt0">
                             {
                                 this.state.clubs.length > 0 ? 
-                                    this.state.clubs.forEach(club => <dt class="f5 b mv1">{club}</dt>) 
+                                    this.state.clubs.map(club => <dt class="f5 b mv1">{club}</dt>) 
                                 : 
                                     <dt class="f5 b mv1">-NA-</dt>
                             }
