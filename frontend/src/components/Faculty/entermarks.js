@@ -36,23 +36,23 @@ class EnterMarks extends React.Component {
 
         this.setState({ stage: 2 });
 
-         // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         subject: this.state.subject,
-        //         grade: this.state.standard,
-        //         section: this.state.section,
-        //         ID: this.state.regnum,
-        //         subject_grade: this.state.subjectgrade,
-        //         academic_year: this.state.year,
-        //         remarks: this.state.remarks,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+         fetch("http://localhost:3001/teacher/add-reportcard",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                subject: this.state.subject,
+                grade: this.state.standard,
+                section: this.state.section,
+                ID: this.state.regnum,
+                subject_grade: this.state.subjectgrade,
+                academic_year: this.state.year,
+                remarks: this.state.remarks,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
         document.getElementById("myform").reset();
     }
@@ -175,7 +175,7 @@ class EnterMarks extends React.Component {
                             <div class="cf pa3">
                                 <dl class="f4 lh-title mv2">
                                     <dt class="dib fw5">Student ID:</dt>
-                                    <dd class="dib ml2 black-80">{this.state.id}</dd>
+                                    <dd class="dib ml2 black-80">{this.state.regnum}</dd>
                                 </dl>
                                 <dl class="f4 lh-title mv2">
                                     <dt class="dib fw5">Subject:</dt>
