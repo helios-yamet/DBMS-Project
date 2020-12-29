@@ -1,6 +1,8 @@
 import React from "react";
 import ClubMembers from "./members";
 
+var array = []
+
 class ClubsList extends React.Component {
     constructor() {
         super();
@@ -15,17 +17,18 @@ class ClubsList extends React.Component {
     }
 
     componentDidMount() {
-        const clubs = [
-            { name: 'AV Club', incharge: 'Shanaya Frye' },
-            { name: 'Green Club', incharge: 'Haydon Mccormick' },
-            { name: 'Art Club', incharge: 'Savannah Delgado' },
-            { name: 'Red Cross', incharge: 'Teddie Dunlap' },
-            { name: 'Blue Cross', incharge: 'Sufyaan Jensen' },
-            { name: 'Music Club', incharge: 'Louie Barrett' },
-        ];
-
-        this.setState({ clubs: clubs });
-        clubs.forEach((e, index) => this.setState({ [`members${index}`]: false }));
+        fetch(`http://localhost:3001/external/Extra Curricular`)
+            .then(res => res.json())
+            .then(items => items.forEach((element,index) => {
+                    array.push({
+                        name: element['Club'],
+                        incharge: element['In charge'],
+                    });
+                this.setState({ [`members${index}`]: false });
+                this.setState({
+                    clubs: array
+                });
+            }));        
     }
 
     toggle = (event) => {

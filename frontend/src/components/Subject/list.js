@@ -1,20 +1,30 @@
 import React from "react";
+var array = []
 
 class SubjectList extends React.Component {
-    render() {
-        const subs = [
-            { subject: 'Chemistry', hod: 'John Smith', id: 'AX123' },
-            { subject: 'Physics', hod: 'Jane Smith', id: 'AX123' },
-            { subject: 'English', hod: 'Olivia Harper', id: 'AX123' },
-            { subject: 'Biology', hod: 'Sarah Levy', id: 'AX123' },
-            { subject: 'Computer Science', hod: 'Juan Carlos', id: 'AX123' },
-            { subject: 'Mathematics', hod: 'Mike Jones', id: 'AX123' },
-            { subject: 'Social Studies', hod: 'Evan McHale', id: 'AX123' },
-        ];
+    constructor() {
+        super();
+        this.state = {
+            details: [],
+        }
+    }
 
+    componentDidMount() {
+        fetch(`http://localhost:3001/external/Departments`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+                array.push({ subject: element['Subject'], hod: element['HOD'], id: element['Subject ID'] });
+
+                this.setState({
+                    details: array
+                });
+            }));
+    }
+
+    render() {
         let items = [];
 
-        subs.forEach(dept => {
+        this.state.details.forEach(dept => {
             items.push(<article>
                 <a class="link dt w-100 bb b--black-10 pb2 mt2 blue" href="#0">
                     <div class="dtc w3">

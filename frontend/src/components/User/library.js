@@ -11,7 +11,7 @@ class Library extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         
-        this.setState({ show: true });
+        
 
         fetch("http://localhost:3001/student/library",{
             method: 'post',
@@ -24,7 +24,7 @@ class Library extends React.Component {
         })
             .then(res => res.json())
             .then(dues => this.setState({ due: dues['Dues'] }));
-
+            this.setState({ show: true });
         document.getElementById("myform").reset();
     }
 

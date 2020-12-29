@@ -1,4 +1,5 @@
 import React from "react";
+var array = []
 
 class FacultyDetails extends React.Component {
     constructor() {
@@ -14,17 +15,24 @@ class FacultyDetails extends React.Component {
     }
 
     componentDidMount() {
-        const subs = [
-            { subject: 'Chemistry', name: 'John Smith', email: 'john@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'Physics', name: 'Jane Smith', email: 'jane@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'English', name: 'Olivia Harper', email: 'olive@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'Biology', name: 'Sarah Levy', email: 'sarah@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'Computer Science', name: 'Juan Carlos', email: 'juan@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'Mathematics', name: 'Mike Jones', email: 'mike@email.com', phone: '+1 (999) 555-5555' },
-            { subject: 'Social Studies', name: 'Evan McHale', email: 'evan@email.com', phone: '+1 (999) 555-5555' },
-        ];
+        fetch(`http://localhost:3001/external/Employees`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+                console.log(element)
+                if(element['Subject Taught'] !== null)
+                    array.push({ 
+                        subject: element['Subject Taught'], 
+                        name: `${element["First_Name"]} ${element["Middle_Name"] !== '' && element["Middle_Name"] !== null ? element["Middle_Name"] + ' ' : ' '}${element["Last_Name"]}`, 
+                        id: element['Employee ID'],
+                        phone: element['Contact Number'],
+                    });
 
-        this.setState({ subs: subs });
+                this.setState({
+                    details: array
+                });
+            }));
+
+        this.setState({ subs: array });
     }
 
     render() {
@@ -44,7 +52,7 @@ class FacultyDetails extends React.Component {
                 <div className="pl3 flex-auto">
                     <span className="f6 db black-70">{teacher.name}</span>
                     <span className="f6 db black-70">{teacher.subject}</span>
-                    <span className="f6 db black-70">{teacher.email}</span>
+                    <span className="f6 db black-70">{teacher.id}</span>
                 </div>
                 <div>
                     <a href="tel:" className="f6 link blue hover-dark-gray">{teacher.phone}</a>

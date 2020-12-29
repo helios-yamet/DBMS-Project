@@ -24,6 +24,9 @@ const knex = require('knex')({
 
 const signinpage = require('./utils/signin')
 const edit = require('./utils/edit')
+const external = require('./utils/External')
+const club_members= require("./utils/members")
+
 
 const student_extracurricular=require('./utils/Students/extracurricular')
 const student_fee=require('./utils/Students/feepayment')
@@ -46,11 +49,16 @@ const admin_item_modify=require('./utils/Admin/modify')
 const app= express();
 
 const { Http2ServerRequest } = require("http2");
+const members = require('./utils/members');
 app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) =>  res.json('Server is running'));
 app.post("/signin", signinpage.handleSignin(knex));
+app.get("/external/:table",external.getTable(knex))
+app.post("/external/club-members",members.GetMembers(knex))
+
+
 app.post('/admin/add-teacher',admin_teachers.addTeachers(knex))
 app.post('/admin/add-canteen',admin_canteen.addCanteen(knex))
 app.post('/admin/add-transport',admin_transport.addTransport(knex))
