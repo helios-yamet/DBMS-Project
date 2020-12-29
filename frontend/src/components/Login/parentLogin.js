@@ -30,12 +30,12 @@ class ParentLogin extends React.Component {
             .then(user => {
                 const setUser = {
                     id: this.state.password,
-                    phone: user[0]['Contact Number'],
-                    fname: user[0]['FName'],
-                    mname: user[0]['MName'],
-                    lname: user[0]['LName'],
-                    email: user[0]['Email'],
-                    company: user[0]['Employment'],
+                    phone: user['Contact Number'],
+                    fname: user['FName'],
+                    mname: user['MName'],
+                    lname: user['LName'],
+                    email: user['Email'],
+                    company: user['Employment'],
                 };
                 
                 
