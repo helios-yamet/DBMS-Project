@@ -20,6 +20,7 @@ class EditProfile extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                userType: this.props.userType,
                 contact: this.state.phone,
                 ID: this.state.id,
                 fname: this.state.fname,
@@ -41,6 +42,7 @@ class EditProfile extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                userType: this.props.userType,
                 contact: this.state.phone,
                 ID: this.state.id,
                 fname: this.state.fname,
@@ -60,6 +62,7 @@ class EditProfile extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                userType: this.props.userType,
                 contact: this.state.phone,
                 id: this.state.id,
                 fname: this.state.fname,
@@ -85,13 +88,13 @@ class EditProfile extends React.Component {
             <main className="pa4 black-80">
                 <form className="measure center">
                     {
-                (this.props.userType === 'Student' || this.props.userType === 'Faculty' || this.props.userType === 'Admin') &&
+                (userType === 'Student' || userType === 'Faculty' || userType === 'Admin') &&
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f4 fw6 ph0 mh0">Edit Profile</legend>
                         <div className="mt3 flex justify-between">
                             <div>
                                 <label className="db fw6 lh-copy f6" for="id">
-                                    {this.props.userType === 'Student' ? 'Registration Number' : 'Employee ID'}
+                                    {userType === 'Student' ? 'Registration Number' : 'Employee ID'}
                                 </label>
                                 <input className="pa2 input-reset ba bg-transparent"
                                     type="number"
@@ -199,7 +202,7 @@ class EditProfile extends React.Component {
                                 onChange={this.onChange}
                             />
                         </div>
-                        {this.props.userType === 'Student' ?
+                        {userType === 'Student' ?
                             <div className="mv3 flex justify-between">
                                 <div>
                                     <label className="db fw6 lh-copy f6" for="standard">Standard</label>
@@ -220,7 +223,7 @@ class EditProfile extends React.Component {
                                     />
                                 </div>
                             </div>
-                            : this.props.userType === 'Faculty' ?
+                            : userType === 'Faculty' ?
                                 <div className="mv3 flex justify-between">
                                     <div>
                                         <label className="db fw6 lh-copy f6" for="status">Marital Status</label>
@@ -275,7 +278,7 @@ class EditProfile extends React.Component {
                     </fieldset>
             }
             {
-                this.props.userType === 'Parent' &&
+                userType === 'Parent' &&
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="f4 fw6 ph0 mh0">Edit Profile</legend>
                             <div className="mt3 flex justify-between">

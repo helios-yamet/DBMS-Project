@@ -1,5 +1,5 @@
 import React from "react";
-
+var array=[]
 class ReportCard extends React.Component {
     constructor() {
         super();
@@ -23,11 +23,14 @@ class ReportCard extends React.Component {
             })
         })
             .then(res => res.json())
-            .then(report => {
-                this.setState({ report: report });
+            .then(report => {report.forEach(element => {
+                array.push(element)
+            });;
+                
+                
                 this.setState({ show: true });
             });
-            
+
         document.getElementById("myform").reset();
     }
 
@@ -37,14 +40,16 @@ class ReportCard extends React.Component {
 
     render() {
         let items = [];
-        
-        this.state.report.forEach((e, index) => items.push(
-            <tr class="striped--light-gray">
-                <td class="pa3">{e['Subject']}</td>
-                <td class="pa3">{e['Subject_Grade']}</td>
-                <td class="pa3">{e['Teacher comments']}</td>
-            </tr>
-        ));
+
+        for (let i = 0; i < array.length; i++) {
+            items.push(
+                <tr class="striped--light-gray">
+                    <td class="pa3">{array[i]['Subject']}</td>
+                    <td class="pa3">{array[i]['Subject_Grade']}</td>
+                    <td class="pa3">{array[i]['Teacher comments']}</td>
+                </tr>
+            );
+        }
 
         return (
             <div>

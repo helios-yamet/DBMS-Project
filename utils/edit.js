@@ -1,12 +1,13 @@
 const EditUser = (knex) => (req, res) => {
     const { userType } = req.body;
-    console.log(req.body.userType);
+    console.log(userType);
 if(userType=="Student")
-{   const {fname,lname,mname,contact,bldgno,area,street,dob,id} =req.body
-    knex('Student')
-        .where('Student ID', '=', id)
+{   const {fname,lname,mname,contact,bldgno,area,street,dob,ID} =req.body
+console.log(req.body)
+    knex('Students')
+        .where('Student ID', '=', ID)
         .update({
-           [ "First Name"]:fname,
+           ["First Name"]:fname,
             ["Last Name"]:lname,
             ["Middle Name"]:mname,
             ["Contact Number"]:contact,
@@ -40,9 +41,9 @@ else if(userType=='Admin'||userType=="Faculty")
 
 else 
 {
-    const {fname,lname,mname,job,contact,mail,id} =req.body
+    const {fname,lname,mname,job,contact,mail,ID} =req.body
     knex('Guardians')
-        .where('Contact Number', '=', id)
+        .where('Contact Number', '=', contact)
         .update({
             FName:fname,
             LName:lname,
