@@ -11,31 +11,32 @@ class FeeDetail extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         
-        this.setState({ show: true });
+      
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: this.props.id,
-        //         section: this.state.section,
-        //         grade: this.state.standard,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(feeDetails => thi.setState({ details: feeDetails }));
-    
-        this.setState({ details: { status: true, fees: 3450.50} })
+        fetch("http://localhost:3001/student/fees",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.id,
+                section: this.state.section,
+                grade: this.state.standard,
+            })
+        })
+            .then(res => res.json())
+            .then(feeDetails =>{ this.setState({ details: feeDetails });console.log(feeDetails);  this.setState({ show: true });});
+            
+     //   this.setState({ details: { status: true, fees: 3450.50} })
         document.getElementById("myform").reset();
     }
 
     onChange = (event) => {
-        this.setState({ id: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 <div className="ma4 pa4-l">
