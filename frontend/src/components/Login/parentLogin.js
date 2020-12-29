@@ -29,7 +29,6 @@ class ParentLogin extends React.Component {
             .then(res => res.json())
             .then(user => {
                 const setUser = {
-                    userType: user[0]['userType'],
                     id: this.state.password,
                     phone: user[0]['Contact Number'],
                     fname: user[0]['FName'],
@@ -41,7 +40,7 @@ class ParentLogin extends React.Component {
                 
                 
                 this.props.setSignedIn(true);
-                this.props.setUserType(this.state.userType);
+                this.props.setUserType(user['userType']);
                 this.props.loadUser(setUser);
                 this.props.onRouteChange(`/user-home`);
             });
