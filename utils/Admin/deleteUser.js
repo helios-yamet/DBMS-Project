@@ -1,18 +1,22 @@
 const DeleteUser = (knex) => (req, res) => {
     const {id} =req.body
+    console.log("id:"+id)
     var count;
-    var contact= knex('Guardians of')
-    .where("Student ID",'=',id).del()
+    var contact= knex('Guardian of')
+    .where("Student ID",'=',id)
+    .del()
     .returning('Contact Number')
-    .then(t=>{
+    .then(t=>{console.log("t"+t+typeof t);
+
         knex('Guardian of')
             .count('Contact Number')
-            .where("Contact Number",'=',t)
-            .then(result=>count=result)
-            .catch(e=>console.log("cannot get count"))
+            .where("Contact Number",'=',parseInt(t))
+            .then(result=>count=parseInt(result))
+            .catch(e=>console.log("contact",console.log(e)))
 
     })
-    .catch(err => res.status(400).json("Cannot delete from Students"));
+    .catch(err => console.log(err));
+    console.log("count",count)
     if(count==0)
     {
         knex('Guardians')
@@ -20,12 +24,13 @@ const DeleteUser = (knex) => (req, res) => {
         .del()
 
     }
+    
     knex('Students')
     .where('Student ID','=',id).del()
-    .then(t=>{console.log("Deleted from Student");res.status(400)})
-    .catch(err => res.status(400).json("Cannot delete from student"));
+    .then(t=>{console.log(t);res.status(400)})
+    .catch(err => res.status(400).json(console.log(err)));
 
-
+/*
     knex('Employees')
     .where('Employee ID','=',id).del()
     .then(t=>{console.log("Deleted from employees");res.status(400)})
@@ -35,10 +40,10 @@ const DeleteUser = (knex) => (req, res) => {
 
     knex('Login')
     .where("id",'=',id).del()
-    .then(t=>{console.log("Deleted from Students");res.status(400)})
+    .then(t=>{console.log("Deleted from Login");res.status(400)})
     .catch(err => res.status(400).json("Cannot Delete from login"));
 
-    
+    */
 }
 
 

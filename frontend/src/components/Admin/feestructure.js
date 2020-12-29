@@ -1,4 +1,5 @@
 import React from "react";
+var array = []
 
 class FeeStructure extends React.Component {
     constructor() {
@@ -68,38 +69,44 @@ class FeeStructure extends React.Component {
         });
         console.log(this.state);
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         section: this.state.section,
-        //         grade: this.state.standard,
-        //         fees: this.state.fees,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        fetch("http://localhost:3001/admin/add-fees",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                section: this.state.section,
+                grade: this.state.standard,
+                fees: this.state.fees,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
         this.setState({ details: newdetails });
         document.getElementById("myform").reset();
     }
 
     componentDidMount() {
-        // fetch(`http://localhost:3001/profile`)
-        //     .then(res => res.json())
-        //     .then(items => console.log(items));
+        fetch(`http://localhost:3001/admin/view-fees`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+        array.push({ fees: element['Fees'], standard: element['Grade'], section: element['Section'] });
 
         this.setState({
-            details: [
-                { fees: 2700, standard: 9, section: 'A' },
-                { fees: 2750, standard: 9, section: 'B' },
-                { fees: 3000, standard: 10, section: 'C' },
-                { fees: 3500, standard: 11, section: 'F' },
-                { fees: 3800, standard: 12, section: 'B' },
-            ]
+            details: array
         });
+
+        // this.setState({
+        //     details: [
+        //         { fees: 2700, standard: 9, section: 'A' },
+        //         { fees: 2750, standard: 9, section: 'B' },
+        //         { fees: 3000, standard: 10, section: 'C' },
+        //         { fees: 3500, standard: 11, section: 'F' },
+        //         { fees: 3800, standard: 12, section: 'B' },
+        //     ]
+        // });
+            }))
     }
 
     render() {

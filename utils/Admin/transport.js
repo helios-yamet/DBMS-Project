@@ -2,7 +2,7 @@ const getTransport = (knex) => (req, res) => {
 
     knex('Transport')
         .returning('*')
-        .then(transport => transport.json(fees[0]))
+        .then(transport => transport.json(transport))
         .catch(err => res.status(400).json("Cant access Transport table"));
 }
 

@@ -2,7 +2,7 @@ const getFees = (knex) => (req, res) => {
 
     knex('Fees')
         .returning('*')
-        .then(fee => res.json(fee[0]))
+        .then(fee => res.json(fee))
         .catch(err => res.status(400).json("Error accessing Fees table"));
 }
 

@@ -2,7 +2,7 @@ const getCanteen = (knex) => (req, res) => {
 
     knex('Canteen')
         .returning('*')
-        .then(canteen => res.json(canteen[0]))
+        .then(canteen => res.json(canteen))
         .catch(err => res.status(400).json("User not found"));
 }
 

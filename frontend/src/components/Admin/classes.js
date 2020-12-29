@@ -1,4 +1,5 @@
 import React from "react";
+var array = []
 
 class ClassesList extends React.Component {
     constructor() {
@@ -35,32 +36,36 @@ class ClassesList extends React.Component {
             teacher: this.state.teacher,
         });
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         section: this.state.section,
-        //         grade: this.state.standard,
-        //         fees: this.state.fees,
-        //         teacher: this.state.teacher,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
-        // window.location.reload();
+        fetch("http://localhost:3001/admin/add-teacher",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                section: this.state.section,
+                grade: this.state.standard,
+                sub: this.state.subject,
+                teacher: this.state.teacher,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
-        this.setState({ details: newdetails });
+         this.setState({ details: newdetails });
         document.getElementById("myform").reset();
     }
 
     componentDidMount() {
-        // fetch(`http://localhost:3001/profile`)
-        //     .then(res => res.json())
-        //     .then(items => console.log(items));
+        fetch(`http://localhost:3001/admin/get-teacher`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+        array.push({ subject: element['Subject'], teacher: element['Teacher'], standard: element['Grade'], section: element['Section'] });
 
         this.setState({
+            details: array
+        });
+
+     /*   this.setState({
             details: [
                 { subject: 'French', standard: 9, section: 'F', teacher: 'Franc'  },
                 { subject: 'Hindi', standard: 9, section: 'C', teacher: 'Sita'  },
@@ -68,8 +73,8 @@ class ClassesList extends React.Component {
                 { subject: 'Physical Education', standard: 11, section: 'F', teacher: 'Karen'  },
                 { subject: 'Home Science', standard: 12, section: 'B', teacher: 'Sufi'  },
             ]
-        });
-    }
+        });*/
+    }))}
 
     render() {
         let items = [];

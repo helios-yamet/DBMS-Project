@@ -1,10 +1,11 @@
 import React from "react";
+var array = []
 
 class CanteenList extends React.Component {
     constructor() {
         super();
         this.state = {
-            canteen: []
+            details: []
         }
     }
 
@@ -15,7 +16,7 @@ class CanteenList extends React.Component {
     onRemove = (event) => {
         event.preventDefault();
 
-        let newCanteen = this.state.canteen;
+        let newCanteen = this.state.details;
         console.log(event.target.name);
         newCanteen.splice(event.target.name, 1);
         console.log(newCanteen);
@@ -26,52 +27,47 @@ class CanteenList extends React.Component {
         event.preventDefault();
         console.log(this.state);
 
-        let newCanteen = this.state.canteen;
+        let newCanteen = this.state.details;
         newCanteen.push({
             supplier: this.state.supplier,
             mealname: this.state.mealname,
             price: this.state.price,
         });
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         supplier: this.state.supplier,
-        //         meal: this.state.mealname,
-        //         price: this.state.price,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        fetch("http://localhost:3001/admin/add-canteen",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                supplier: this.state.supplier,
+                meal: this.state.mealname,
+                price: this.state.price,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+    
         
         this.setState({ canteen: newCanteen });
         document.getElementById("myform").reset();
     }
 
     componentDidMount() {
-        // fetch(`http://localhost:3001/profile`)
-        //     .then(res => res.json())
-        //     .then(items => console.log(items));
+        fetch(`http://localhost:3001/admin/view-canteen`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+        array.push({ supplier: element['Supplier'], mealname: element['Meal Name'], price: element['Price'] });
 
-        this.setState({
-            canteen: [
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.00 },
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.00 },
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.50 },
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.00 },
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.00 },
-                { supplier: 'Bayara', mealname: 'Tasty', price: 15.00 },
-            ]
-        });
-    }
+                this.setState({
+                    details: array
+                });
+    }))}
 
     render() {
         let items = [];
         
-        this.state.canteen.forEach((e, index) => items.push(
+        this.state.details.forEach((e, index) => items.push(
             <tr class="stripe-dark">
                 <td class="pa3">{e.supplier}</td>
                 <td class="pa3">{e.mealname}</td>
