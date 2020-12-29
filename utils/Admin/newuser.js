@@ -28,6 +28,7 @@ const Adduser = (knex)=>(req,res)=>{
             .insert({
                 id:ID,
                 hash:dob,
+                userType:"Student"
             })
             .then(data=>{console.log("added to Login")})
             .catch(e=>console.log(e));
@@ -63,6 +64,7 @@ const Adduser = (knex)=>(req,res)=>{
                             .insert({
                                 id:empID,
                                 hash:dob,
+                                userType:"Faculty"
                             })
         .then(data=>{console.log("added to Login");})
         .catch(e=>console.log(e))
@@ -98,6 +100,7 @@ const Adduser = (knex)=>(req,res)=>{
             .insert({
                 id:empID,
                 hash:dob,
+                userType:"Faculty"
             })
         .then(data=>{console.log("added to Login");})
         .catch(e=>console.log(e))})
@@ -133,6 +136,7 @@ const Adduser = (knex)=>(req,res)=>{
         .insert({
             id:contact,
             hash:ID,
+            userType:"Parent"
         })
         .then(data=>{console.log("added to Login");})
         .catch(e=>console.log(e,"login table"))
