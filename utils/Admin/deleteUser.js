@@ -1,50 +1,59 @@
-const DeleteUser = (knex) => (req, res) => {
+const  DeleteUser =  (knex) =>async (req, res) => {
     const {id} =req.body
     console.log("id:"+id)
     var count;
-    var contact= knex('Guardian of')
+    var contact=await knex('Guardian of')
     .where("Student ID",'=',id)
-    .del()
-    .returning('Contact Number')
-    .then(t=>{console.log("t"+t+typeof t);
-                console.log(t)
+    .del('Contact Number')
+    .then(t=>{console.log("t "+typeof t);
+                console.log(parseInt(t[0]), "   ",t[0])
 
         knex('Guardian of')
             .count('Contact Number')
-            .where("Contact Number",'=',parseInt(t))
-            .then(result=>{count=parseInt(result);console.log("result ",typeof result," ", result)})
-            .catch(e=>console.log("contact",console.log(e)))
+            .where("Contact Number",'=',parseInt(t[0]))
+            .then(result=>{;console.log("result ",result[0].count," ", parseInt(result[0].count));
+            if(result[0].count==0)
+            {
+                console.log("here  ",t[0] )
+                knex('Guardians')
+                .where('Contact Number','=',parseInt(t[0]))
+                .del('*')
+                .then(data=>console.log(data))
+
+                knex('Login')
+                .where("id",'=',parseInt(t[0])).del('*')
+                .then(t=>{console.log("Deleted from Login");})
+                .catch(err => res.status(400).json("Cannot Delete from login"));
+            
+        
+            }
+        })
+            .catch(e=>console.log(e))
 
     })
     .catch(err => console.log(err));
-    console.log("count ",count)
-    if(count==0)
-    {
-        knex('Guardians')
-        .where('Contact Number','=',contact)
-        .del()
 
-    }
+   
     
     knex('Students')
-    .where('Student ID','=',id).del()
-    .then(t=>{console.log(t);res.status(400)})
+    .where('Student ID','=',id).del('*')
+    .then(t=>{console.log(t)})
     .catch(err => res.status(400).json(console.log(err)));
 
-/*
+
     knex('Employees')
-    .where('Employee ID','=',id).del()
-    .then(t=>{console.log("Deleted from employees");res.status(400)})
+    .where('Employee ID','=',id).del('*')
+    .then(t=>{console.log("Deleted from employees");})
     .catch(err => res.status(400).json("Cannot delete from Employees"));
 
 
 
     knex('Login')
-    .where("id",'=',id).del()
-    .then(t=>{console.log("Deleted from Login");res.status(400)})
+    .where("id",'=',id).del('*')
+    .then(t=>{console.log("Deleted from Login");})
     .catch(err => res.status(400).json("Cannot Delete from login"));
 
-    */
+ 
 }
 
 
