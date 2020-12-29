@@ -30,9 +30,8 @@ class Login extends React.Component {
             .then(user => {
                 // user = JSON.parse(user);
                 let setUser = {};
-                if(this.state.userType === 'Student')
+                if(user['userType'] === 'Student')
                     setUser = {
-                        userType: user['userType'],
                         id: user['Student ID'],
                         phone: user['Contact Number'],
                         fname: user['First Name'],
@@ -49,9 +48,8 @@ class Login extends React.Component {
                         feepaid: user['Fee Paid'],
                         absentdays: user['Days Absent'],
                     };
-                    if(this.state.userType === 'Admin')
+                    if(user['userType'] === 'Admin')
                     setUser = {
-                        userType: user['userType'],
                         id: user['Employee ID'],
                         phone: user['Contact Number'],
                         fname: user['First_Name'],
@@ -69,9 +67,8 @@ class Login extends React.Component {
                         absentdays: user['Absent Days'],
                         role: user['Role'],
                     };
-                if (this.state.userType === 'Faculty')
+                if (user['userType'] === 'Faculty')
                     setUser = {
-                        userType: user['userType'],
                         id: user['Employee ID'],
                         phone: user['Contact Number'],
                         fname: user['First_Name'],
@@ -89,9 +86,8 @@ class Login extends React.Component {
                         absentdays: user['Absent Days'],
                         subjecttaught: user['Subject Taught'],
                     };
-                console.log('HELLOOO', user['Student ID'], user['DOB']);
                 this.props.setSignedIn(true);
-                this.props.setUserType(this.state.userType);
+                this.props.setUserType(user['userType']);
                 this.props.loadUser(setUser);
                 this.props.onRouteChange(`/user-home`);
              });
