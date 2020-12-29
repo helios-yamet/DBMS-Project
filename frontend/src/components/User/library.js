@@ -13,17 +13,17 @@ class Library extends React.Component {
         
         this.setState({ show: true });
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: this.state.id,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(dues => console.log(dues));
+        fetch("http://localhost:3001/student/library",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.state.id,
+            })
+        })
+            .then(res => res.json())
+            .then(dues => this.setState({ due: dues['Dues'] }));
 
         document.getElementById("myform").reset();
     }
@@ -66,7 +66,7 @@ class Library extends React.Component {
                     <div className="tc">
                         <dl class="dib mr5">
                             <dd class="f6 f5-ns b ml0">Due Amount</dd>
-                            <dd class="f3 f2-ns b ml0">Dhs. 38</dd>
+                            <dd class="f3 f2-ns b ml0">{`Rs. ${this.state.due}`}</dd>
                         </dl>
                     </div>
                 }
