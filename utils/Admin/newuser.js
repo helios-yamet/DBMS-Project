@@ -45,7 +45,7 @@ const Adduser = (knex)=>(req,res)=>{
             ["Employee ID"]:empID,
             ["Absent Days"]:absent,
             ["Contact Number"]: number,
-            First_Name:fname,
+            First_Name:f,
             Middle_Name:mname,
             Last_Name:lname,
             DofB:dob,
@@ -75,13 +75,13 @@ const Adduser = (knex)=>(req,res)=>{
     }
     else if(userType=='Admin')
     {
-        const {empID,absent,number,mname,lname,dob,doj,salary,street,area,role,supervisor,busno,bldgno,marital}   = req.body
+        const {empID,absent,number,f,mname,lname,dob,doj,salary,street,area,role,supervisor,busno,bldgno,marital}   = req.body
         knex('Employees')
         .insert({
             ["Employee ID"]:empID,
             ["Absent Days"]:absent,
             ["Contact Number"]: number,
-            First_Name:fname,
+            First_Name:f,
             Middle_Name:mname,
             Last_Name:lname,
             DofB:dob,
