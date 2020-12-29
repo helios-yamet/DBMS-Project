@@ -14,8 +14,6 @@ class ParentLogin extends React.Component {
     constructor() {
         super();
         this.state = {
-            username: '',
-            password: '',
             userType: 'Parent'
         };
     }
@@ -63,7 +61,7 @@ class ParentLogin extends React.Component {
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f4 fw6 ph0 mh0">Parent Login</legend>
                         <div className="mt3">
-                            <label className="db fw6 lh-copy f6" for="rollnum">Registration Number of Your Child</label>
+                            <label className="db fw6 lh-copy f6" for="username">Registration Number of Your Child</label>
                             <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="text" 
                                 name="username" 
@@ -71,7 +69,7 @@ class ParentLogin extends React.Component {
                                 id="rollnum" />
                         </div>
                         <div className="mv3">
-                            <label className="db fw6 lh-copy f6" for="dob">Date of Birth</label>
+                            <label className="db fw6 lh-copy f6" for="password">Date of Birth</label>
                             <input className="b pa2 input-reset ba bg-transparent w-60" 
                                 type="date" 
                                 name="password" 
