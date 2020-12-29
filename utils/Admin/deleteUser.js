@@ -7,16 +7,17 @@ const DeleteUser = (knex) => (req, res) => {
     .del()
     .returning('Contact Number')
     .then(t=>{console.log("t"+t+typeof t);
+                console.log(t)
 
         knex('Guardian of')
             .count('Contact Number')
             .where("Contact Number",'=',parseInt(t))
-            .then(result=>count=parseInt(result))
+            .then(result=>{count=parseInt(result);console.log("result ",typeof result," ", result)})
             .catch(e=>console.log("contact",console.log(e)))
 
     })
     .catch(err => console.log(err));
-    console.log("count",count)
+    console.log("count ",count)
     if(count==0)
     {
         knex('Guardians')

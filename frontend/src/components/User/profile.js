@@ -11,7 +11,7 @@ class Profile extends React.Component {
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEs54VfKttWWHlHNZ0sHxufrHDhFUOwHOrBg&usqp=CAU" 
                             class="br-100 h4 w4 dib ba b--black-05 pa2" title="avatar" />
                             <h1 class="f3 mb2">
-                                {`${user.fname} ${user.mname !== '' ? user.mname + ' ' : ' '}${user.lname}`}
+                                {`${user.fname} ${user.mname !== ''&&user.mname !== null ? user.mname + ' ' : ' '}${user.lname}`}
                             </h1>
                         </div>
                 </article>

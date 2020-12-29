@@ -24,7 +24,10 @@ class Transport extends React.Component {
             })
         })
             .then(res => res.json())
-            .then(busDetails => {console.log(busDetails["First_Name"]);this.setState({ busDetails: { route: busDetails['Route'], fees: busDetails['Fees'],  } });this.setState({driver:busDetails['First_Name']});this.setState({ show: true });});
+            .then(busDetails => {console.log(busDetails["First_Name"]);
+                                this.setState({ busDetails: { route: busDetails['Route'], fees: busDetails['Fees'],  } });
+                                this.setState({driver:`${busDetails["First_Name"]} ${busDetails["Middle_Name"] !== ''&&busDetails["Middle_Name"] !== null ? busDetails["Middle_Name"] + ' ' : ' '}${busDetails["Last_Name"]}`});
+                                this.setState({ show: true });});
 
         document.getElementById("myform").reset();
     }
@@ -70,7 +73,7 @@ class Transport extends React.Component {
                             </dl>
                             <dl className="dib mr5">
                                 <dd className="f6 f5-ns b ml0">Bus Fees</dd>
-                                <dd className="f3 f2-ns b ml0">{this.state.busDetails.fees}</dd>
+                                <dd className="f3 f2-ns b ml0">{`Rs. ${this.state.busDetails.fees}`}</dd>
                             </dl>
                             <dl className="dib mr5">
                                 <dd className="f6 f5-ns b ml0">Route</dd>
