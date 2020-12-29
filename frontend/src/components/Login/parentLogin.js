@@ -1,14 +1,14 @@
 import React from "react";
 
-const user = {
-    fname: 'a',
-    mname: 'b',
-    lname: 'c',
-    phone: 768454,
-    email: 'test@email.com',
-    company: 'Being awesome',
-    id: 1234
-};
+// const user = {
+//     fname: 'a',
+//     mname: 'b',
+//     lname: 'c',
+//     phone: 768454,
+//     email: 'test@email.com',
+//     company: 'Being awesome',
+//     id: 1234
+// };
 
 class ParentLogin extends React.Component {
     constructor() {
@@ -25,10 +25,35 @@ class ParentLogin extends React.Component {
     }
 
     onSubmit = () => {
-        this.props.setSignedIn(true);
-        this.props.setUserType(this.state.userType);
-        this.props.loadUser(user);
-        this.props.onRouteChange('/user-home');
+        fetch("http://localhost:3001/signin", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userType: this.state.userType,
+                id: this.state.username,
+                password: this.state.password,
+            })
+        })
+            .then(res => res.json())
+            .then(user => {
+                let setUser = {};
+                setUser = {
+                    id: this.state.username,
+                    phone: user['Contact Number'],
+                    fname: user['FName'],
+                    mname: user['MName'],
+                    lname: user['LName'],
+                    email: user['mail'],
+                    company: user['Employment'],
+                };
+
+                this.props.setSignedIn(true);
+                this.props.setUserType(this.state.userType);
+                this.props.loadUser(setUser);
+                this.props.onRouteChange(`/user-home`);
+            });
     }
 
     render() {
@@ -42,6 +67,7 @@ class ParentLogin extends React.Component {
                             <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="text" 
                                 name="username" 
+                                onClick={this.onChange}                                
                                 id="rollnum" />
                         </div>
                         <div className="mv3">
@@ -49,6 +75,7 @@ class ParentLogin extends React.Component {
                             <input className="b pa2 input-reset ba bg-transparent w-60" 
                                 type="date" 
                                 name="password" 
+                                onClick={this.onChange}
                                 id="dob" />
                         </div>
                     </fieldset>

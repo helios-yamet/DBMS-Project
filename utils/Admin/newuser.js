@@ -1,9 +1,10 @@
 const Adduser = (knex)=>(req,res)=>{
     const {userType}=req.body;
 
-    if(useType=='Student')
+    if(userType=='Student')
     {
         const {contact,ID,fname,mname,lname,admission,dob,street,area,bldgno,absent,paid,busno,grade,section}=req.body
+        console.log(req.body,req.body.absent,absent)
         knex('Students')
         .insert({
            ["Contact Number"]:contact,
@@ -17,7 +18,7 @@ const Adduser = (knex)=>(req,res)=>{
             Area:area,
             ["Building Number"]:bldgno,
             ["Days Absent"]:absent,
-            ["Fee Paid"]: paid,
+            ["Fee paid"]: paid,
             ["Bus Number"]: busno,
             Grade:grade,
             Section:section
@@ -28,7 +29,7 @@ const Adduser = (knex)=>(req,res)=>{
         knex('Login')
         .insert({
             id:ID,
-            password:dob,
+            hash:dob,
         })
         .then(data=>{console.log("added to Login");res.status(400)})
         .catch(e=>console.log(e))
@@ -94,7 +95,7 @@ const Adduser = (knex)=>(req,res)=>{
         knex('Login')
         .insert({
             id:empID,
-            password:dob,
+            hash:dob,
         })
         .then(data=>{console.log("added to Login");res.status(400)})
         .catch(e=>console.log(e))
@@ -123,8 +124,8 @@ const Adduser = (knex)=>(req,res)=>{
         .catch(e=>{console.log("error adding to Guardian of\n"+e)});
         knex('Login')
         .insert({
-            id:contact,
-            password:DOB,
+            id:ID,
+            hash:DOB,
         })
         .then(data=>{console.log("added to Login");res.status(400)})
         .catch(e=>console.log(e))

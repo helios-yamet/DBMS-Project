@@ -1,5 +1,6 @@
 const handleSignin = (knex, bcrypt) => (req, res) => { 
     const { id, password, userType } = req.body;
+    console.log(req.body)
     console.log('signin request initiated', id, password);
     var table,column;
     if(!id || !password)
@@ -27,8 +28,8 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
             return knex.select('*'). from(table)
                 .where(column, '=', id)
                 .then(user => {
-                    console.log(user[0]);
-                    res.json(user[0]);
+                    console.log(user);
+                    res.json(user);
                 })
                 .catch(err => { console.log(err); res.status(400).json("Error logging in"); });
         }

@@ -1,4 +1,5 @@
 import React from "react";
+var array = []
 
 class TransportList extends React.Component {
     constructor() {
@@ -67,40 +68,45 @@ class TransportList extends React.Component {
         });
         console.log(this.state);
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         busno: this.state.busnum,
-        //         route: this.state.standard,
-        //         fees: this.state.fees,
-        //         empID: this.state.driverid,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        fetch("http://localhost:3001/admin/add-transport",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                busno: this.state.busnum,
+                route: this.state.route,
+                fees: this.state.fees,
+                empID: this.state.driverid,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
         this.setState({ details: newdetails });
         document.getElementById("myform").reset();
     }
 
     componentDidMount() {
-        // fetch(`http://localhost:3001/profile`)
-        //     .then(res => res.json())
-        //     .then(items => console.log(items));
+        fetch(`http://localhost:3001/admin/view-transport`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+        array.push({ fees: element['Fees'], busnum: element['Bus Number'], route: element['Route'], driverid: element['Employee ID'] });
 
         this.setState({
-            details: [
-                { fees: 2700, busnum: 9, route: 'A', driverid: 1234 },
-                { fees: 2750, busnum: 19, route: 'B', driverid: 1234 },
-                { fees: 3000, busnum: 10, route: 'C', driverid: 1234 },
-                { fees: 3500, busnum: 11, route: 'F', driverid: 1234 },
-                { fees: 3800, busnum: 12, route: 'B', driverid: 1234 },
-            ]
+            details: array
         });
-    }
+
+        // this.setState({
+        //     details: [
+        //         { fees: 2700, busnum: 9, route: 'A', driverid: 1234 },
+        //         { fees: 2750, busnum: 19, route: 'B', driverid: 1234 },
+        //         { fees: 3000, busnum: 10, route: 'C', driverid: 1234 },
+        //         { fees: 3500, busnum: 11, route: 'F', driverid: 1234 },
+        //         { fees: 3800, busnum: 12, route: 'B', driverid: 1234 },
+        //     ]
+        // });
+    }))}
 
     render() {
         let items = [];

@@ -5,7 +5,8 @@ class AddUser extends React.Component {
         super();
         this.state = {
             userType: '',
-            stage: 0
+            stage: 0,
+            absentdays:0
         };
     }
 
@@ -28,107 +29,111 @@ class AddUser extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        // if(userType === 'Student')
-            // fetch("http://localhost:3001/getFees",{
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         contact: this.state.phone,
-            //         ID: this.state.id,
-            //         fname: this.state.fname,
-            //         mname: this.state.mname,
-            //         lname: this.state.lname,
-            //         admission: this.state.doj,
-            //         dob: this.state.dob,
-            //         street: this.state.street,
-            //         area: this.state.area,
-            //         bldgno: this.state.bldg,
-            //         absent: this.state.absentdays,
-            //         paid: this.state.feepaid,
-            //         busno: this.state.busnum,
-            //         grade: this.state.standard,
-            //         section: this.state.section,
-            //     })
-            // })
-            //     .then(res => res.json())
-            //     .then(data => console.log(data));
+        if(this.state.userType === 'Student')
+            fetch("http://localhost:3001/admin/new-user",{
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userType: this.state.userType,
+                    contact: this.state.phone,
+                    ID: this.state.id,
+                    fname: this.state.fname,
+                    mname: this.state.mname,
+                    lname: this.state.lname,
+                    admission: this.state.doj,
+                    dob: this.state.dob,
+                    street: this.state.street,
+                    area: this.state.area,
+                    bldgno: this.state.bldg,
+                    absent: this.state.absentdays,
+                    paid: this.state.feepaid,
+                    busno: this.state.busnum,
+                    grade: this.state.standard,
+                    section: this.state.section,
+                })
+            })
+                .then(res => res.json())
+                .then(data => console.log(data));
 
-        // if(userType === 'Parent')
-            // fetch("http://localhost:3001/getFees",{
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         contact: this.state.phone,
-            //         ID: this.state.id,
-            //         fname: this.state.fname,
-            //         mname: this.state.mname,
-            //         lname: this.state.lname,
-            //         job: this.state.company,
-            //         mail: this.state.email,
-            //     })
-            // })
-            //     .then(res => res.json())
-            //     .then(data => console.log(data));
+        if(this.state.userType === 'Parent')
+            fetch("http://localhost:3001/admin/new-user",{
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userType: this.state.userType,
+                    contact: this.state.phone,
+                    ID: this.state.id,
+                    fname: this.state.fname,
+                    mname: this.state.mname,
+                    lname: this.state.lname,
+                    job: this.state.company,
+                    mail: this.state.email,
+                })
+            })
+                .then(res => res.json())
+                .then(data => console.log(data));
 
-        // if(userType === 'Faculty')
-            // fetch("http://localhost:3001/getFees",{
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         number: this.state.phone,
-            //         empID: this.state.id,
-            //         f: this.state.fname,
-            //         mname: this.state.mname,
-            //         lname: this.state.lname,
-            //         doj: this.state.doj,
-            //         dob: this.state.dob,
-            //         street: this.state.street,
-            //         area: this.state.area,
-            //         bldgno: this.state.bldg,
-            //         absent: this.state.absentdays,
-            //         busno: this.state.busnum,
-            //         salary: this.state.salary,
-            //         sub: this.state.subjecttaught,
-            //         marital: this.state.maritalstatus,
-            //         supervisor: this.state.supervisor,
-            //     })
-            // })
-            //     .then(res => res.json())
-            //     .then(data => console.log(data));
+        if(this.state.userType === 'Faculty')
+            fetch("http://localhost:3001/admin/new-user",{
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userType: this.state.userType,
+                    number: this.state.phone,
+                    empID: this.state.id,
+                    f: this.state.fname,
+                    mname: this.state.mname,
+                    lname: this.state.lname,
+                    doj: this.state.doj,
+                    dob: this.state.dob,
+                    street: this.state.street,
+                    area: this.state.area,
+                    bldgno: this.state.bldg,
+                    absent: this.state.absentdays,
+                    busno: this.state.busnum,
+                    salary: this.state.salary,
+                    sub: this.state.subjecttaught,
+                    marital: this.state.maritalstatus,
+                    supervisor: this.state.supervisor,
+                })
+            })
+                .then(res => res.json())
+                .then(data => console.log(data));
 
-        // if(userType === 'Admin')
-            // fetch("http://localhost:3001/getFees",{
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({
-            //         number: this.state.phone,
-            //         empID: this.state.id,
-            //         f: this.state.fname,
-            //         mname: this.state.mname,
-            //         lname: this.state.lname,
-            //         doj: this.state.doj,
-            //         dob: this.state.dob,
-            //         street: this.state.street,
-            //         area: this.state.area,
-            //         bldgno: this.state.bldg,
-            //         absent: this.state.absentdays,
-            //         busno: this.state.busnum,
-            //         salary: this.state.salary,
-            //         role: this.state.role,
-            //         supervisor: this.state.supervisor,
-            //         marital: this.state.maritalstatus,
-            //     })
-            // })
-            //     .then(res => res.json())
-            //     .then(data => console.log(data));
+        if(this.state.userType === 'Admin')
+            fetch("http://localhost:3001/admin/new-user",{
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userType: this.state.userType,
+                    number: this.state.phone,
+                    empID: this.state.id,
+                    f: this.state.fname,
+                    mname: this.state.mname,
+                    lname: this.state.lname,
+                    doj: this.state.doj,
+                    dob: this.state.dob,
+                    street: this.state.street,
+                    area: this.state.area,
+                    bldgno: this.state.bldg,
+                    absent: this.state.absentdays,
+                    busno: this.state.busnum,
+                    salary: this.state.salary,
+                    role: this.state.role,
+                    supervisor: this.state.supervisor,
+                    marital: this.state.maritalstatus,
+                })
+            })
+                .then(res => res.json())
+                .then(data => console.log(data));
 
         this.setState({ stage: 2 });
     }
@@ -184,6 +189,7 @@ class AddUser extends React.Component {
                                     <input className="b pa2 input-reset ba bg-transparent w-100"
                                         type="number"
                                         name="id"
+                                        onChange={this.onChange}
                                     />
                                 </div>
                             <div className="mv3 flex justify-between">
@@ -232,10 +238,11 @@ class AddUser extends React.Component {
                                     />
                                 </div>
                                 <div>
-                                    <label className="db fw6 lh-copy f6" for="busnum">Email Address</label>
+                                    <label className="db fw6 lh-copy f6" for="email">Email Address</label>
                                     <input className="b pa2 input-reset ba bg-transparent"
                                         type="email"
                                         name="email"
+                                        onChange={this.onChange}
                                     />
                                 </div>
                             </div>
@@ -267,6 +274,7 @@ class AddUser extends React.Component {
                                         <input className="pa2 input-reset ba bg-transparent"
                                             type="number"
                                             name="id"
+                                            onChange={this.onChange}
                                         />
                                     </div>
                                     <div>
@@ -276,6 +284,7 @@ class AddUser extends React.Component {
                                         <input className="pa2 input-reset ba bg-transparent"
                                             type="date"
                                             name="doj"
+                                            onChange={this.onChange}
                                         />
                                     </div>
                                 </div>
@@ -315,6 +324,7 @@ class AddUser extends React.Component {
                                         <input className="pa2 input-reset ba bg-transparent"
                                             type="date"
                                             name="dob"
+                                            onChange={this.onChange}
                                         />
                                     </div>
                                 </div>
@@ -334,6 +344,7 @@ class AddUser extends React.Component {
                                         <input className="b pa2 input-reset ba bg-transparent"
                                             type="number"
                                             name="busnum"
+                                            onChange={this.onChange}
                                         />
                                     </div>
                                 </div>
@@ -366,6 +377,7 @@ class AddUser extends React.Component {
                                             <input className="b pa2 input-reset ba bg-transparent"
                                                 type="number"
                                                 name="standard"
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                         <div>
@@ -373,6 +385,7 @@ class AddUser extends React.Component {
                                             <input className="b pa2 input-reset ba bg-transparent"
                                                 type="text"
                                                 name="section"
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -405,6 +418,7 @@ class AddUser extends React.Component {
                                                     type="text"
                                                     maxLength="5"
                                                     name="subjecttaught"
+                                                    onChange={this.onChange}
                                                 />
                                             </div>
                                             </div>
@@ -415,6 +429,7 @@ class AddUser extends React.Component {
                                                     min="0"
                                                     step="0.01"
                                                     name="salary"
+                                                    onChange={this.onChange}
                                                 />
                                             </div>
                                             <div className="mv3">
@@ -422,6 +437,7 @@ class AddUser extends React.Component {
                                                 <input className="b pa2 input-reset ba bg-transparent w-100"
                                                     type="number"
                                                     name="supervisor"
+                                                    onChange={this.onChange}
                                                 />
                                             </div>
                                         </div>
@@ -441,6 +457,7 @@ class AddUser extends React.Component {
                                                 <input className="b pa2 input-reset ba bg-transparent"
                                                     type="text"
                                                     name="role"
+                                                    onChange={this.onChange}
                                                 />
                                             </div>
                                         </div>
@@ -451,6 +468,7 @@ class AddUser extends React.Component {
                                                 min="0"
                                                 step="0.01"
                                                 name="salary"
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                         <div className="mv3">
@@ -458,17 +476,19 @@ class AddUser extends React.Component {
                                             <input className="b pa2 input-reset ba bg-transparent w-100"
                                                 type="number"
                                                 name="supervisor"
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
                                         }
                                 <div className="mv3">
-                                    <label className="db fw6 lh-copy f6" for="name">Number of leave days availed</label>
+                                    <label className="db fw6 lh-copy f6" for="absent days">Number of leave days availed</label>
                                     <input className="b pa2 input-reset ba bg-transparent w-100"
                                         type="number"
                                         name="absentdays"
                                         min="0"
                                         defaultValue="0"
+                                        onChange={this.onChange}
                                     />
                                 </div>
                             </fieldset>
