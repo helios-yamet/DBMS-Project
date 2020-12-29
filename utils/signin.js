@@ -22,14 +22,15 @@ const handleSignin = (knex, bcrypt) => (req, res) => {
     knex.select('id', 'hash'). from('Login')
     .where('id', '=', id)
     .then(data => {
-        console.log("recieved"+data[0]+'\n');
+        console.log("recieved ",data[0],'\n');
+
         if(password==data[0].hash) {
             console.log('logged in');
             return knex.select('*'). from(table)
                 .where(column, '=', id)
                 .then(user => {
                     console.log(user);
-                    res.json(user);
+                    res.json(user[0]);
                 })
                 .catch(err => { console.log(err); res.status(400).json("Error logging in"); });
         }

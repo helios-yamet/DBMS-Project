@@ -1,5 +1,6 @@
 import React from "react";
 var array=[]
+
 class LibraryList extends React.Component {
     constructor() {
         super();
@@ -30,15 +31,16 @@ class LibraryList extends React.Component {
                 array.push({ cardnum: element['Library card Number'], regnum: element['Student ID'], empid: element['Employee ID'], dues: element['Dues'], })
             }));
 
-        
-       
+        this.setState({
+            details: array
+        });  
     }
 
     render() {
-        let items = [], filteredDetails = array;
+        let items = [], filteredDetails = this.state.details;
 
         if(this.state.searchfield !== '')
-            filteredDetails = array.filter((d => {
+            filteredDetails = this.state.details.filter((d => {
                 return (d.cardnum+'').indexOf(this.state.searchfield) > -1
                     || (d.regnum+'').indexOf(this.state.searchfield) > -1
                     || (d.empid+'').indexOf(this.state.searchfield) > -1

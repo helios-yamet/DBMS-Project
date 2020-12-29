@@ -27,7 +27,7 @@ class CanteenList extends React.Component {
             body: JSON.stringify({
                 table: 'Canteen',
                 pk: 'Supplier',
-                key: newCanteen[event.target.name].supplier,
+                key1: newCanteen[event.target.name].supplier,
             })
         })
             .then(res => res.json())
