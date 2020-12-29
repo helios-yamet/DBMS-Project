@@ -10,6 +10,8 @@ class SubjectList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/external/Departments`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

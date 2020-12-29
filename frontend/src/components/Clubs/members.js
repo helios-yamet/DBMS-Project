@@ -9,6 +9,8 @@ class ClubMembers extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch("http://localhost:3001/external/club-members", {
             method: 'post',
             headers: {

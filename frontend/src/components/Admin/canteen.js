@@ -69,6 +69,8 @@ class CanteenList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/admin/view-canteen`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

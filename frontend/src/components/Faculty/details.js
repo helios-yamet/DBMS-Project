@@ -15,6 +15,8 @@ class FacultyDetails extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/external/Employees`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

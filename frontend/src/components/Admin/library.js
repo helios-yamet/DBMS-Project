@@ -25,6 +25,8 @@ class LibraryList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/admin/library`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

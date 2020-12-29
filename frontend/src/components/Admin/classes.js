@@ -72,6 +72,8 @@ class ClassesList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/admin/get-teacher`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

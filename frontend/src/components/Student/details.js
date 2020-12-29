@@ -10,6 +10,8 @@ class StudentDetails extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch("http://localhost:3001/student/extracurricular",{
             method: 'post',
             headers: {

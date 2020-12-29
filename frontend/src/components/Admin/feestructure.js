@@ -120,6 +120,8 @@ class FeeStructure extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/admin/view-fees`)
             .then(res => res.json())
             .then(items => items.forEach(element => {

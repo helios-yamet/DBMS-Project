@@ -17,6 +17,8 @@ class ClubsList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/external/Extra Curricular`)
             .then(res => res.json())
             .then(items => items.forEach((element,index) => {

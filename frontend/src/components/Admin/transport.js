@@ -118,6 +118,8 @@ class TransportList extends React.Component {
     }
 
     componentDidMount() {
+        array = [];
+
         fetch(`http://localhost:3001/admin/view-transport`)
             .then(res => res.json())
             .then(items => items.forEach(element => {
