@@ -36,6 +36,10 @@ const Adduser = (knex)=>(req,res)=>{
     })
         .catch(e=>{console.log("error adding to Students\n"+e)});        
 
+        knex('Classroom')
+        .where("Grade",'=',grade)
+        .andWhere("Section",'=',section)
+        .increment('Strength',1)
 }    
     else if(userType=='Faculty')
     {

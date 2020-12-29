@@ -10,7 +10,7 @@ class StudentDetails extends React.Component {
     }
 
     componentDidMount() {
-        array = [];
+        var array = [];
 
         fetch("http://localhost:3001/student/extracurricular",{
             method: 'post',
@@ -53,7 +53,7 @@ class StudentDetails extends React.Component {
                 <article class="hide-child relative mw5 center">
                     <div class="tc">
                         <h1 class="f3 mb2">
-                            {`${user.fname} ${user.mname !== '' ? user.mname + ' ' : ' '}${user.lname}`}
+                        {`${user.fname} ${user.mname !== ''&&user.mname !== null ? user.mname + ' ' : ' '}${user.lname}`}
                         </h1>
                         <h2 class="f5 fw5 black-80 mt0">
                             {`Registration Number - ${user.id}`}

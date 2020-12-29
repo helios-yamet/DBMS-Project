@@ -80,8 +80,6 @@ class NavBar extends React.Component {
                                     userType === 'Faculty' ? 
                                         <div>
                                             <li><a className="f6 link dib white dim mr3 mr4-ns"
-                                                onClick={() => this.props.onRouteChange('/responsibilities')}>Responsibilities</a></li>
-                                            <li><a className="f6 link dib white dim mr3 mr4-ns"
                                                 onClick={() => this.props.onRouteChange('/enter-marks')}>Enter marks of a student</a></li>
                                             <li><a className="f6 link dib white dim mr3 mr4-ns"
                                                 onClick={() => this.props.onRouteChange('/library')}>Library Dues</a></li>

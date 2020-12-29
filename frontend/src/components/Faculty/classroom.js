@@ -18,7 +18,9 @@ class Classroom extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        
+        array = []
+       strength = 0
+      teacher = ''
 
         fetch("http://localhost:3001/teacher/classroom",{
             method: 'post',
