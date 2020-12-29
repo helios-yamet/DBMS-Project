@@ -1,6 +1,6 @@
 const EditUser = (knex) => (req, res) => {
     const { userType } = req.body;
-
+    console.log(req.body.userType);
 if(userType=="Student")
 {   const {fname,lname,mname,contact,bldgno,area,street,dob,id} =req.body
     knex('Student')
@@ -16,7 +16,7 @@ if(userType=="Student")
             DOB: dob
         })
         .then(user => res.status(400))
-        .catch(err => res.status(400).json("User not found"));
+        .catch(err => console.log(err));
 }
 else if(userType=='Admin'||userType=="Faculty")
 {
@@ -35,7 +35,7 @@ else if(userType=='Admin'||userType=="Faculty")
             ["Marital Status"]: marital
         })
         .then(user => res.status(400))
-        .catch(err => res.status(400).json("User not found"));   
+        .catch(err => console.log(err));   
 }
 
 else 
@@ -52,7 +52,7 @@ else
             Employment:job
         })
         .then(user => res.status(400))
-        .catch(err => res.status(400).json("User not found"));   
+        .catch(err => console.log(err));   
 }
 }
 

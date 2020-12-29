@@ -11,21 +11,23 @@ class ReportCard extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         
-        this.setState({ show: true });
 
-         // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: this.props.id,
-        //         year: this.state.year,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(report => console.log(report));
-
+         fetch("http://localhost:3001/student/reportcard",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.id,
+                year: this.state.year,
+            })
+        })
+            .then(res => res.json())
+            .then(report => {
+                this.setState({ report: report });
+                this.setState({ show: true });
+            });
+            
         document.getElementById("myform").reset();
     }
 
@@ -34,6 +36,16 @@ class ReportCard extends React.Component {
     }
 
     render() {
+        let items = [];
+        
+        this.state.report.forEach((e, index) => items.push(
+            <tr class="striped--light-gray">
+                <td class="pa3">{e['Subject']}</td>
+                <td class="pa3">{e['Subject_Grade']}</td>
+                <td class="pa3">{e['Teacher comments']}</td>
+            </tr>
+        ));
+
         return (
             <div>
                 <div className="pa4-l">
@@ -72,31 +84,7 @@ class ReportCard extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody class="lh-copy">
-                                    <tr class="striped--light-gray">
-                                        <td class="pa3">Computer Science</td>
-                                        <td class="pa3">A</td>
-                                        <td class="pa3">You</td>
-                                    </tr>
-                                    <tr class="striped--light-gray">
-                                        <td class="pa3">Chemistry</td>
-                                        <td class="pa3">B</td>
-                                        <td class="pa3">Can</td>
-                                    </tr>
-                                    <tr class="striped--light-gray">
-                                        <td class="pa3">English</td>
-                                        <td class="pa3">C</td>
-                                        <td class="pa3">Do</td>
-                                    </tr>
-                                    <tr class="striped--light-gray">
-                                        <td class="pa3">Physics</td>
-                                        <td class="pa3">B</td>
-                                        <td class="pa3">Better</td>
-                                    </tr>
-                                    <tr class="striped--light-gray">
-                                        <td class="pa3">Mathematics</td>
-                                        <td class="pa3">A</td>
-                                        <td class="pa3">Kid</td>
-                                    </tr>
+                                    { items }
                                 </tbody>
                             </table>
                         </div>

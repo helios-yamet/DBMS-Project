@@ -13,67 +13,67 @@ class EditProfile extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        // if(userType === 'Student')
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         contact: this.state.phone,
-        //         ID: this.state.id,
-        //         fname: this.state.fname,
-        //         mname: this.state.mname,
-        //         lname: this.state.lname,
-        //         dob: this.state.dob,
-        //         street: this.state.street,
-        //         area: this.state.area,
-        //         bldgno: this.state.bldg,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        if(this.props.userType === 'Student')
+        fetch("http://localhost:3001/edit",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contact: this.state.phone,
+                ID: this.state.id,
+                fname: this.state.fname,
+                mname: this.state.mname,
+                lname: this.state.lname,
+                dob: this.state.dob,
+                street: this.state.street,
+                area: this.state.area,
+                bldgno: this.state.bldg,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
-        // if(userType === 'Parent')
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         contact: this.state.phone,
-        //         ID: this.state.id,
-        //         fname: this.state.fname,
-        //         mname: this.state.mname,
-        //         lname: this.state.lname,
-        //         job: this.state.company,
-        //         mail: this.state.email,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        if(this.props.userType === 'Parent')
+        fetch("http://localhost:3001/edit",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contact: this.state.phone,
+                ID: this.state.id,
+                fname: this.state.fname,
+                mname: this.state.mname,
+                lname: this.state.lname,
+                job: this.state.company,
+                mail: this.state.email,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
-        // if(userType === 'Faculty' || userType === 'Admin')
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         contact: this.state.phone,
-        //         id: this.state.id,
-        //         fname: this.state.fname,
-        //         mname: this.state.mname,
-        //         lname: this.state.lname,
-        //         dob: this.state.dob,
-        //         street: this.state.street,
-        //         area: this.state.area,
-        //         bldgno: this.state.bldg,
-        //         marital: this.state.maritalstatus,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        if(this.props.userType === 'Faculty' || this.props.userType === 'Admin')
+        fetch("http://localhost:3001/edit",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contact: this.state.phone,
+                id: this.state.id,
+                fname: this.state.fname,
+                mname: this.state.mname,
+                lname: this.state.lname,
+                dob: this.state.dob,
+                street: this.state.street,
+                area: this.state.area,
+                bldgno: this.state.bldg,
+                marital: this.state.maritalstatus,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
         this.props.loadUser(this.state);
         this.props.onRouteChange('/profile');
@@ -85,13 +85,13 @@ class EditProfile extends React.Component {
             <main className="pa4 black-80">
                 <form className="measure center">
                     {
-                (userType === 'Student' || userType === 'Faculty' || userType === 'Admin') &&
+                (this.props.userType === 'Student' || this.props.userType === 'Faculty' || this.props.userType === 'Admin') &&
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f4 fw6 ph0 mh0">Edit Profile</legend>
                         <div className="mt3 flex justify-between">
                             <div>
                                 <label className="db fw6 lh-copy f6" for="id">
-                                    {userType === 'Student' ? 'Registration Number' : 'Employee ID'}
+                                    {this.props.userType === 'Student' ? 'Registration Number' : 'Employee ID'}
                                 </label>
                                 <input className="pa2 input-reset ba bg-transparent"
                                     type="number"
@@ -199,7 +199,7 @@ class EditProfile extends React.Component {
                                 onChange={this.onChange}
                             />
                         </div>
-                        {userType === 'Student' ?
+                        {this.props.userType === 'Student' ?
                             <div className="mv3 flex justify-between">
                                 <div>
                                     <label className="db fw6 lh-copy f6" for="standard">Standard</label>
@@ -220,7 +220,7 @@ class EditProfile extends React.Component {
                                     />
                                 </div>
                             </div>
-                            : userType === 'Faculty' ?
+                            : this.props.userType === 'Faculty' ?
                                 <div className="mv3 flex justify-between">
                                     <div>
                                         <label className="db fw6 lh-copy f6" for="status">Marital Status</label>
@@ -275,7 +275,7 @@ class EditProfile extends React.Component {
                     </fieldset>
             }
             {
-                userType === 'Parent' &&
+                this.props.userType === 'Parent' &&
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="f4 fw6 ph0 mh0">Edit Profile</legend>
                             <div className="mt3 flex justify-between">

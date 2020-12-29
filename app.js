@@ -72,4 +72,5 @@ app.post('/student/library',student_lib.getLibrarydues(knex))
 app.post('/student/reportcard',student_report.getReportcard(knex))
 app.post('/student/transport',student_transport.getTransport(knex))
 
+app.post('/edit',edit.Edituser(knex))
 app.listen(process.env.PORT||3001)
