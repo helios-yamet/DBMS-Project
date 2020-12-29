@@ -16,17 +16,17 @@ class DeleteUser extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         id: this.state.id,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data));
+        fetch("http://localhost:3001/admin/delete-user",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.state.id,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
 
         this.setState({ stage: this.state.stage + 1 });
     }

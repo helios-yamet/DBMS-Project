@@ -95,7 +95,7 @@ class Login extends React.Component {
                         mname: user['Middle_Name'],
                         lname: user['Last_Name'],
                         doj: user['Date of Joining'],
-                        dob: user['DOB'],
+                        dob: user['DofB'],
                         bldg: user['Building Number'],
                         street: user['Street Name'],
                         area: user['Area'],

@@ -1,5 +1,5 @@
 import React from "react";
-
+var array=[]
 class LibraryList extends React.Component {
     constructor() {
         super();
@@ -24,38 +24,33 @@ class LibraryList extends React.Component {
     }
 
     componentDidMount() {
-        // fetch(`http://localhost:3001/profile`)
-        //     .then(res => res.json())
-        //     .then(items => console.log(items));
+        fetch(`http://localhost:3001/admin/library`)
+            .then(res => res.json())
+            .then(items => items.forEach(element => {
+                array.push({ cardnum: element['Library card Number'], regnum: element['Student ID'], empid: element['Employee ID'], dues: element['Dues'], })
+            }));
+
         
-        this.setState({
-            details: [
-                { cardnum: 1010101, regnum: 1004, empid: 8585, dues: 0 },
-                { cardnum: 2020202, regnum: 1103, empid: 2025, dues: 20 },
-                { cardnum: 3030303, regnum: 12021, empid: 1226, dues: 15 },
-                { cardnum: 5050505, regnum: 8033, empid: 2575, dues: 0 },
-                { cardnum: 1080808, regnum: 12224, empid: 7815, dues: 5 },
-            ]
-        });
+       
     }
 
     render() {
-        let items = [], filteredDetails = this.state.details;
+        let items = [], filteredDetails = array;
 
         if(this.state.searchfield !== '')
-            filteredDetails = this.state.details.filter((d => {
+            filteredDetails = array.filter((d => {
                 return (d.cardnum+'').indexOf(this.state.searchfield) > -1
                     || (d.regnum+'').indexOf(this.state.searchfield) > -1
                     || (d.empid+'').indexOf(this.state.searchfield) > -1
             }));
-
+            console.log(filteredDetails)
         filteredDetails.forEach((e, index) => items.push(
             <tr class="stripe-dark">
-                <td class="pa3">{e.cardnum}</td>
-                <td class="pa3">{e.regnum}</td>
-                <td class="pa3">{e.empid}</td>
-                <td class="pa3">{e.dues}</td>
-            </tr>
+            <td class="pa3">{e.cardnum}</td>
+            <td class="pa3">{e.regnum === null ? '-NA-' : e.regnum}</td>
+            <td class="pa3">{e.empid=== null ? '-NA-' : e.empid}</td>
+            <td class="pa3">{e.dues}</td>
+        </tr>
         ));
 
         return (
