@@ -1,5 +1,5 @@
 import React from "react";
-
+var array=[],strength,teacher
 class Classroom extends React.Component {
     constructor() {
         super();
@@ -18,22 +18,29 @@ class Classroom extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
 
-        this.setState({ show: true });
+        
 
-        // fetch("http://localhost:3001/getFees",{
-        //     method: 'post',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         grade: this.state.standard,
-        //         section: this.state.section,
-        //     })
-        // })
-        //     .then(res => res.json())
-        //     .then(classroom => console.log(classroom));
+        fetch("http://localhost:3001/teacher/classroom",{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                grade: this.state.standard,
+                section: this.state.section,
+            })
+        })
+            .then(res => res.json())
+            .then(classroom => {
+                strength=classroom['class'][0]["Strength"]
+                teacher=classroom['class'][0]["Class Teacher"]
+                classroom["students"].forEach(element => {
+                    array.push(`${element["First Name"]} ${element["Last Name"]}`)
+                });
+                this.setState({ show: true });
+            });
 
-        this.setState({ students: [
+        /*this.setState({ students: [
             "Mackenzie Archer",
             "Leilani Delgado",
             "Idris Stanton",
@@ -50,7 +57,7 @@ class Classroom extends React.Component {
             "Rita Oliver",
             "Carrie - Ann Knox",
         ] });
-        
+        */
         document.getElementById("myform").reset();
     }
 
@@ -94,11 +101,11 @@ class Classroom extends React.Component {
                         <div className="tc">
                             <dl class="dib mr5">
                                 <dd class="f6 f5-ns b ml0">Strength</dd>
-                                <dd class="f3 f2-ns b ml0">15</dd>
+                                <dd class="f3 f2-ns b ml0">{strength}</dd>
                             </dl>
                             <dl class="dib mr5">
-                                <dd class="f6 f5-ns b ml0">Class Teacher</dd>
-                                <dd class="f3 f2-ns b ml0">Mary Poppins</dd>
+                                <dd class="f6 f5-ns b ml0">Class Teacher ID</dd>
+                                <dd class="f3 f2-ns b ml0">{teacher}</dd>
                             </dl>
                         </div>
                         <div class="overflow-auto">
@@ -110,7 +117,7 @@ class Classroom extends React.Component {
                                 </thead>
                                 <tbody class="lh-copy">
                                 {
-                                        this.state.students.map(name => <tr class="striped--light-gray">
+                                        array.map(name => <tr class="striped--light-gray">
                                             <td class="pa3">{name}</td>
                                         </tr>)
                                 }
