@@ -17,7 +17,7 @@ import EnterMarks from './components/Faculty/entermarks';
 import FeeDetail from './components/Student/fees';
 import Classroom from './components/Faculty/classroom';
 import StudentDetails from './components/Student/details';
-import FacultyResponsibilities from './components/Faculty/responsibilities';
+// import FacultyResponsibilities from './components/Faculty/responsibilities';
 import ClubsList from './components/Clubs/list';
 import CanteenList from './components/Admin/canteen';
 import TransportList from './components/Admin/transport';
@@ -91,8 +91,8 @@ class App extends React.Component {
         return <Classroom />;
       case '/student-details':
         return <StudentDetails user={this.state.user} />;
-      case '/responsibilities':
-        return <FacultyResponsibilities user={this.state.user} />;
+      // case '/responsibilities':
+      //   return <FacultyResponsibilities user={this.state.user} />;
       case '/clubs':
         return <ClubsList />;
       case '/canteen-list':

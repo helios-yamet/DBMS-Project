@@ -36,8 +36,8 @@ class Profile extends React.Component {
                                 <dd class="ml0">{user.id}</dd>
                                 <dt class="f6 b mt2">Phone Number</dt>
                                 <dd class="ml0">{user.phone}</dd>
-                                <dt class="f6 b mt2">Email Address</dt>
-                                <dd class="ml0">{user.email}</dd>
+                                {/* <dt class="f6 b mt2">Email Address</dt>
+                                <dd class="ml0">{user.email}</dd> */}
                                 <dt class="f6 b mt2">Date of Birth</dt>
                                 <dd class="ml0">{user.dob}</dd>
                                 <dt class="f6 b mt2">Address</dt>
